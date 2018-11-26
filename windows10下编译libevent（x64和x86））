@@ -1,0 +1,53 @@
+1、下载
+github上下载libevent-release-2.1.8-stable
+系统环境win10
+编译器vs2017
+ 
+2、解压
+    加压文件，网上有帖子说需要再event_iocp.c、evthread_win32.c、listener.c中添加_WIN32_WINNT，但是实际上2.1.8版本里面已经有了，无需添加。
+ 
+3、使用vs命令行工具编译项目
+运行目录C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Visual Studio 2017\Visual Studio Tools\VC的位置下有x86命令行工具（如果想要64位的库，则运行x64）。
+
+cd libevent-release-2.1.8-stable\libevent-release-2.1.8-stable
+若使用64位，则编辑文件Makefile.nmake，修改如下内容，并用x64工具
+LIBFLAGS=/nologo
+修改为如下
+LIBFLAGS=/nologo /MACHINE:X64
+
+如果已经编译过32位了，则需要使用clean进行清理，否则直接编译
+nmake /f Makefile.nmake clean   
+nmake /f Makefile.nmake  
+
+执行完成后，会在当前目录下生成libevent_core.lib、libevent_extras.lib、libevent.lib三个库文件
+ 
+4、新建空项目，准备使用libevent库
+a.	建立如下目录结构，
+ ├─Practice
+│  ├─Debug
+│  │  └─Practice.tlog
+│  └─libevent
+│      ├─include
+│      │  ├─event2
+│      │  └─nmake
+│      │      └─event2
+│      ├─lib32
+│      ├─lib64
+将libevent-2.0.22-stable\include和WIN32-Code下的文件和文件夹赋值到include目录中目录下。
+将namke目录下的events文件夹下的文件也拷贝到include的events文件夹下面。
+将32位的libevent_core.lib、libevent_extras.lib、libevent.lib文件复制到lib32目录中，如果是64位的就放到64位下面。
+ 
+b.	Vs2017切换到解决方案视图，右击项目，打开项目属性。设置包含目录include和库目录lib32（如果是64就设置之前创建的lib64目录的位置）、以及连接器->输入->附加依赖项（ws2_32.lib;wsock32.lib;libevent.lib;libevent_core.lib;libevent_extras.lib）。
+
+5、配置好后，将libevent-release-2.1.8-stable\sample文件夹下的hello-world.c内容拷贝到我们的项目main文件中。
+这里面有一点需要注意，struct event_base *base = user_data;这行代码要改为
+struct event_base *base = (struct event_base *)user_data; 否则无法编译通过。同时，在项目属性里面，C/C++ -> 命令行 里面添加如下字段 /D _CRT_SECURE_NO_WARNINGS 。
+
+ 
+6、运行，弹出黑色屏幕，按下ctrl+c，会提示“Caught an interrupt signal; exiting cleanly in two seconds.”。如果使用其他tcp客户端工具连接端口9995，会回传信息 “Hello, World!”
+参考 
+https://blog.csdn.net/flyingleo1981/article/details/51822343
+https://www.cnblogs.com/secondtonone1/p/5554075.html
+https://blog.csdn.net/tpriwwq/article/details/53467128 讲解windows下32位和64位库的编译方式
+
+
