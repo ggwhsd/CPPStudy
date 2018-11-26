@@ -3,6 +3,7 @@
 #include <ctime>
 #include <ratio>
 #include <chrono>
+#include <iomanip>
 /*
 	chrono里面有三个概念：
 	1、durations：一个时间跨度，例如1秒，一分钟，一小时，10毫秒等等。
@@ -36,7 +37,7 @@ void testSystemClock()
 
 	system_clock::time_point today = system_clock::now();
 	system_clock::time_point tomorrow = today + one_day;
-
+	
 	std::time_t tt;
 
 	tt = system_clock::to_time_t(today);
@@ -85,19 +86,114 @@ void testSystemClock_milliSecond()
 	system_clock::time_point timenext = timenow + one_millisecond;
 
 	cout << "millisecond" << std::chrono::duration_cast< std::chrono::duration<float>>(timenext - timenow).count()<< endl;
+
+	typedef chrono::time_point<chrono::system_clock, chrono::milliseconds> microClock_type;
+	microClock_type tp = chrono::time_point_cast<chrono::milliseconds>(chrono::system_clock::now());
+	
+	//转换为ctime.用于打印显示时间   
+	time_t tt = chrono::system_clock::to_time_t(tp);
+	char _time[50];
+	ctime_s(_time, sizeof(_time), &tt);
+	cout << "now time is : " << _time<< ":"<<tp.time_since_epoch().count() % (1000) << "ms\n";
+	//计算距离1970-1-1,00:00的时间长度，因为当前时间点定义的精度为毫秒，所以输出的是毫秒   
+	cout << "" << endl;
+
+	tp = chrono::time_point_cast<chrono::milliseconds>(chrono::system_clock::now());
+	tt = chrono::system_clock::to_time_t(tp);
+	char timebuf[50];
+	tm ltm;
+	localtime_s(&ltm,&tt);
+	strftime(timebuf, 30, "%F %R:%S", &ltm);
+	cout <<  timebuf << ":"<< tp.time_since_epoch().count() % (1000) << "ms\n";
+	int i = 0;
+	while (i < 10000)
+	{
+		
+		i++;
+	}
+	microClock_type tp2 = chrono::time_point_cast<chrono::milliseconds>(chrono::system_clock::now());
+	//转换为ctime.用于打印显示时间   
+	 tt = chrono::system_clock::to_time_t(tp2);
+	localtime_s(&ltm, &tt);
+	strftime(timebuf, 30, "%F %R:%S", &ltm);
+	cout << " " << timebuf << ":" << tp2.time_since_epoch().count() % (1000) << "ms\n";
+	
 }
 
 void testElapsedtime()
 {
 	std::chrono::time_point<std::chrono::system_clock> start, end;
 	start = std::chrono::system_clock::now();
-	std::cout << "f(42) = " << '\n';
+	int i = 0;
+	
+	while (i < 100000)
+	{
+		
+		i++;
+	}
 	end = std::chrono::system_clock::now();
 
 	std::chrono::duration<double> elapsed_seconds = end - start;
 	std::time_t end_time = std::chrono::system_clock::to_time_t(end);
-
+	
 	std::cout 
 		<< "elapsed time: " << elapsed_seconds.count() << "s\n";
 	
+}
+
+
+void testSystemClock_microSeconds()
+{
+	using std::chrono::system_clock;
+
+	//milli等于ratio<1,1000>即 1/1000 秒
+	//mirco等于ratio<1,1000000>即 1/1000000 秒
+	std::chrono::duration<int, std::micro> one_mircoSecond(1);
+	using micro1 = std::chrono::duration<int, micro>;
+
+	system_clock::time_point timenow = system_clock::now();
+	system_clock::time_point timenext = timenow + one_mircoSecond;
+	//count的单位是秒
+	cout << "one_mircoSecond" << std::chrono::duration_cast< std::chrono::duration<float>>(timenext - timenow).count() << endl;
+
+
+	//设置time_point的时钟和count最小周期为微秒，目前使用的windows机器count默认是0.1微秒。
+	typedef chrono::time_point<chrono::system_clock, chrono::microseconds> microClock_type;
+	time_t tt;
+	//将system_clock的time_point结构转换为微秒计算
+	microClock_type tp = chrono::time_point_cast<chrono::microseconds>(chrono::system_clock::now());
+	int i = 0;
+	while (i < 100000)
+	{
+
+		i++;
+	}
+	microClock_type tp2 = chrono::time_point_cast<chrono::microseconds>(chrono::system_clock::now());
+	tt = chrono::system_clock::to_time_t(tp);
+	char timebuf[50];
+	tm ltm;
+	localtime_s(&ltm, &tt);
+	strftime(timebuf, 30, "%F %R:%S", &ltm);
+	//count的单位是微秒，显示为秒需要乘以10的-6次方
+	cout << timebuf << ":" << setfill('0') << setw(6)<<tp.time_since_epoch().count() % (1000000) << "micros\n";
+	//转换为ctime.用于打印显示时间   
+	tt = chrono::system_clock::to_time_t(tp2);
+	localtime_s(&ltm, &tt);
+	strftime(timebuf, 30, "%F %R:%S", &ltm);
+	cout << " " << timebuf << ":" <<  setfill('0') << setw(6) <<tp2.time_since_epoch().count() % (1000000) << "micros\n";
+	
+	
+	
+	char mircostr[8];
+	mircostr[7] = '\0';
+	sprintf_s(mircostr,".%06d", (int)(tp2.time_since_epoch().count() % (1000000)));
+	cout << mircostr << endl;
+	string str(timebuf);
+	
+	str.append(mircostr);
+	cout << "str=" << str.c_str() << endl;
+
+	strcat_s(timebuf, mircostr);
+	cout << "timebuf=" << timebuf << endl;
+
 }
