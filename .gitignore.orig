@@ -1,0 +1,12 @@
+.gitignore
+Debug/
+*.csv
+Release/
+*.con
+.vs/
+*.log
+*.dat
+VS2017Project/Debug
+VS2017Project/Practice/Debug
+*.filters
+*.user
