@@ -29,7 +29,7 @@ static void conn_writecb(struct bufferevent *, void *);
 static void conn_eventcb(struct bufferevent *, short, void *);
 static void signal_cb(evutil_socket_t, short, void *);
 
-static int testMain(int argc, char **argv)
+static int testLibeventHello(int argc, char **argv)
 {
 	struct event_base *base;
 	struct evconnlistener *listener;
