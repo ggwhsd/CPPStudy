@@ -1,5 +1,11 @@
 #pragma once
 
+/*
+ *	how to use init a tcp-server based on libevent
+ *  how to use signal     
+ *  how to send message to the tcp-client
+ *  how to receive message from the tcp-client
+ */
 #include "stdafx.h"
 #include <string.h>
 #include <errno.h>
