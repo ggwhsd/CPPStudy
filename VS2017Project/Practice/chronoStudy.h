@@ -197,3 +197,21 @@ void testSystemClock_microSeconds()
 	cout << "timebuf=" << timebuf << endl;
 
 }
+typedef chrono::time_point<chrono::system_clock, chrono::microseconds> microClock_type;
+string getSystemClock_microSeconds()
+{
+	
+	microClock_type tp2 = chrono::time_point_cast<chrono::microseconds>(chrono::system_clock::now());
+	time_t tt;
+	tt = chrono::system_clock::to_time_t(tp2);
+	char timebuf[50];
+	tm ltm;
+	localtime_s(&ltm, &tt);
+	strftime(timebuf, 30, "%F %R:%S", &ltm);
+	char mircostr[8];
+	mircostr[7] = '\0';
+	sprintf_s(mircostr, ".%06d", (int)(tp2.time_since_epoch().count() % (1000000)));
+	string str(timebuf);
+	str.append(mircostr);
+	return str;
+}

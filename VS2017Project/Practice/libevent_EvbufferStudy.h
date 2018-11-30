@@ -1,11 +1,12 @@
 #pragma once
+#pragma once
 
 /*
- *	how to use init a tcp-server based on libevent
- *  how to use signal     
- *  how to send message to the tcp-client
- *  2018-11-30 , "conn_readcb", GUGW , how to receive message from the tcp-client \ reply the message to the tcp-client \ close when received the "stop"
- */
+*	how to use init a tcp-server based on libevent
+*  how to use signal
+*  how to send message to the tcp-client
+*  2018-11-30 , "conn_readcb", GUGW , how to receive message from the tcp-client \ reply the message to the tcp-client \ close when received the "stop"
+*/
 #include "stdafx.h"
 #include <string.h>
 #include <errno.h>
@@ -39,7 +40,7 @@ static void conn_readcb(struct bufferevent *, void *);
 static void conn_eventcb(struct bufferevent *, short, void *);
 static void signal_cb(evutil_socket_t, short, void *);
 
-static int testLibeventHello(int argc, char **argv)
+static int testLibeventEvbuffer(int argc, char **argv)
 {
 	struct event_base *base;
 	struct evconnlistener *listener;
@@ -61,7 +62,7 @@ static int testLibeventHello(int argc, char **argv)
 	sin.sin_family = AF_INET;
 	sin.sin_port = htons(PORT);
 	//利用libevent 建立监听绑定,当有新连接来时，触发listener_cb函数
-	listener = evconnlistener_new_bind(base, listener_cb, (void *)base, 
+	listener = evconnlistener_new_bind(base, listener_cb, (void *)base,
 		LEV_OPT_REUSEABLE | LEV_OPT_CLOSE_ON_FREE, -1,
 		(struct sockaddr*)&sin,
 		sizeof(sin));
@@ -96,28 +97,29 @@ listener_cb(struct evconnlistener *listener, evutil_socket_t fd,
 {
 	struct event_base *base = (struct event_base *)user_data;
 	struct bufferevent *bev;
-
+	struct evbuffer *buf = evbuffer_new();
 	bev = bufferevent_socket_new(base, fd, BEV_OPT_CLOSE_ON_FREE);
 	if (!bev) {
 		fprintf(stderr, "Error constructing bufferevent!");
 		event_base_loopbreak(base);
 		return;
 	}
-	bufferevent_setcb(bev, conn_readcb, conn_writecb, conn_eventcb, NULL);
+	bufferevent_setcb(bev, conn_readcb, conn_writecb, conn_eventcb, buf);
 	bufferevent_enable(bev, EV_WRITE);
 	bufferevent_enable(bev, EV_READ);
-	bufferevent_setwatermark(bev, EV_READ, 4, 4);
+	bufferevent_setwatermark(bev, EV_READ, 0, 0);
 	//bufferevent_disable(bev, EV_READ);
 	int len = 3;
 	int i = len;
-	while(i>0)
+	while (i>0)
 	{
 		i--;
-		bufferevent_write(bev, MESSAGE, strlen(MESSAGE));
-		//printf("bufferevent_write\n");
+		//bufferevent_write(bev, MESSAGE, strlen(MESSAGE));
+		evbuffer_add(buf, MESSAGE, strlen(MESSAGE));
+		bufferevent_write_buffer(bev, buf);
 		//std::this_thread::sleep_for(std::chrono::milliseconds(1));
 	}
-	printf("%s  write %f KB\n", getSystemClock_microSeconds().c_str(), strlen(MESSAGE)*len/1024.0);
+	printf("%s  write %f KB\n", getSystemClock_microSeconds().c_str(), strlen(MESSAGE)*len / 1024.0);
 	closeflag = false;
 }
 
@@ -125,37 +127,53 @@ static void
 conn_writecb(struct bufferevent *bev, void *user_data)
 {
 	struct evbuffer *output = bufferevent_get_output(bev);
-	
+
 	if (evbuffer_get_length(output) == 0) {
 		printf("%s flushed answer\n", getSystemClock_microSeconds().c_str());
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));
-		if(closeflag)
+		if (closeflag)
 			bufferevent_free(bev);
 	}
 	else
 	{
 		printf("%s flushed answer1\n", getSystemClock_microSeconds().c_str());
 	}
-	
+
 }
 
 
 static void
 conn_readcb(struct bufferevent *bev, void *user_data)
 {
+
+	struct evbuffer *buf = (struct evbuffer *)user_data;
 	char line[256];
 	int n;
 	evutil_socket_t fd = bufferevent_getfd(bev);
 	while (n = bufferevent_read(bev, line, 255), n > 0)
 	{
 		line[n] = '\0';
-		printf("fd=%u, read line: %s\n", fd, line);
-		
+		//printf("fd=%u, read line: %s\n", fd, line);
+		printf("%s",  line);
 	}
-	char enter[] = "we received your message\n";
-	bufferevent_write(bev, enter, strlen(enter));
-	if(strcmp(line,"stop")==0)
-		closeflag = true;
+	//bufferevent_write(bev, enter, strlen(enter));
+	evbuffer_add(buf, line, strlen(line));
+	const char *separate = "\r\n";
+	struct evbuffer_ptr ptr = evbuffer_search(buf, separate, strlen(separate), 0);
+	if (ptr.pos != -1) {
+		
+		bufferevent_write_buffer(bev, buf); //使用buffer的方式输出结果  
+		ptr = evbuffer_search(buf, "stop", strlen("stop"), 0);
+		if (ptr.pos != -1)
+			closeflag = true;
+	}
+	else
+	{
+		//printf("%d",evbuffer_get_length(buf));
+	}
+
+	
+	
 }
 static void
 conn_eventcb(struct bufferevent *bev, short events, void *user_data)
@@ -169,6 +187,8 @@ conn_eventcb(struct bufferevent *bev, short events, void *user_data)
 	}
 	/* None of the other events can happen here, since we haven't enabled
 	* timeouts */
+	struct evbuffer *buf = (struct evbuffer *)user_data;
+	evbuffer_free(buf);
 	bufferevent_free(bev);
 }
 
@@ -181,4 +201,5 @@ signal_cb(evutil_socket_t sig, short events, void *user_data)
 	printf("Caught an interrupt signal; exiting cleanly in two seconds.\n");
 
 	event_base_loopexit(base, &delay);
+
 }

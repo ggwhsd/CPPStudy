@@ -157,6 +157,8 @@
     <ClInclude Include="chronoStudy.h" />
     <ClInclude Include="exceptionStudy.h" />
     <ClInclude Include="libeventHello.h" />
+    <ClInclude Include="libevent_EvbufferStudy.h" />
+    <ClInclude Include="NetBigEndStudy.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="WindowsFileApi.h" />
