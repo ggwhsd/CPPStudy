@@ -18,4 +18,4 @@ using C++ 11  ,vs2017
 * JSONStudy.h show how to use json based on NLOHMANN_JSON.h.
 
 
-* [effective c++](CPPStudy/effective_Cpp_50rules.md) 是当做读书笔记，基本上就是把看到的经过自己的大脑再走一遍。
+* [effective c++](./effective_Cpp_50rules.md) 是当做读书笔记，基本上就是把看到的经过自己的大脑再走一遍。
