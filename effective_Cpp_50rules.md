@@ -36,9 +36,9 @@ c++是一个联邦语言。一开始c++是c加上了一些面向对象的特性�
 
 ## 条款【3】
 
-尽可能使用const。
+尽可能使用`const`。
 
-const可以修饰指针，可以修饰指针所指物，或者两者都是。
+`const`可以修饰指针，可以修饰指针所指物，或者两者都是。
 
 	char hello[]="hello";
 	char* ptr = hello;
@@ -46,8 +46,15 @@ const可以修饰指针，可以修饰指针所指物，或者两者都是。
 	char* const ptr = hello;          //const pointer, non-const data
 	const char* const ptr = hello;    //const pointer, const data
 
-const 可以修饰方法，表示该方法不可以修改成员变量。如果存在，则编译报错。
+`const` 可以修饰方法，表示该方法不可以修改成员变量。如果存在，则编译报错。
 
-const 可以修饰方法的返回值，表示返回值不可以被修改，这是一种对于返回的引用变量，阻止其操作成员内部变量的方法。
+`const` 可以修饰方法的返回值，表示返回值不可以被修改，这是一种对于返回的引用变量，阻止其操作成员内部变量的方法。
 
-将non-const转换为const，可以通过static_cast。将const转换为non-const,可以使用const_cast。
+将`non-const`转换为`const`，可以通过`static_cast`。将`const`转换为`non-const`,可以使用`const_cast`。
+
+
+## 条款【4】
+
+确定对象使用前已经被初始化。
+
+牢记一条：构造函数最好使用成员初始值列，而不要在构造函数中进行赋值。初始值列的次序应该和它们在class中的声明次序相同。
