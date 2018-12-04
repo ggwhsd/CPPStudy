@@ -28,3 +28,21 @@ c++是一个联邦语言。一开始c++是c加上了一些面向对象的特性�
 
 头文件   ` const int Num;`
 实现文件 `const int GameBB::Num = 5;`
+
+假如在编译阶段就需要用常量,又不能给常量赋值？比如定义数组，此时可以用enum
+	enum {Num=5}
+	int scores[Num]
+	
+
+## 条款【3】
+
+尽可能使用const。
+
+const可以修饰指针，可以修饰指针所指物，或者两者都是。
+
+	char hello[]="hello";
+	char* ptr = hello;
+	const char* ptr = hello;          //non-const pointer, but const data
+	char* const ptr = hello;          //const pointer, non-const data
+	const char* const ptr = hello;    //const pointer, const data
+
