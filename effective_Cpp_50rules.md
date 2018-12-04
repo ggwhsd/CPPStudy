@@ -21,9 +21,9 @@ c++是一个联邦语言。一开始c++是c加上了一些面向对象的特性�
 1. 如果使用`char*`，则需要`const char* const name = "effective"`，不过，书中建议使用`string`，如`const std::string name("effective")`;
 2. 如果是在类中定义常量,假设类为GameBB，则需要声明为
 	`static const int Num = 5`；
-
 同时在实现文件中定义 
 	`const int GameBB::Num`，无需赋值。
+
 但是有一种情况，编译器可能不支持上述这种写法，则可以改为如下的写法:
 
 头文件   ` const int Num;`
