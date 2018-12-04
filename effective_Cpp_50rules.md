@@ -46,3 +46,8 @@ const可以修饰指针，可以修饰指针所指物，或者两者都是。
 	char* const ptr = hello;          //const pointer, non-const data
 	const char* const ptr = hello;    //const pointer, const data
 
+const 可以修饰方法，表示该方法不可以修改成员变量。如果存在，则编译报错。
+
+const 可以修饰方法的返回值，表示返回值不可以被修改，这是一种对于返回的引用变量，阻止其操作成员内部变量的方法。
+
+将non-const转换为const，可以通过static_cast。将const转换为non-const,可以使用const_cast。
