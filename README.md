@@ -6,7 +6,7 @@ using C++ 11  ,vs2017
 
 * exceptionStudy.h shows how to use try-catch.
 
-* libeventHello.h shows the compiled libevent.dll is in the directory : ../VS2017Project/Practice/libevent/lib32 or ../VS2017Project/Practice/libevent/lib64
+* libeventHello.h shows the compiled libevent.dll is in the directory : ../VS2017Project/Practice/libevent/lib32 or ../VS2017Project/Practice/libevent/lib64 [how to compile](./windows10下编译libevent（x64和x86））)
 
 * NetBigEndStudy.h shows how to deal with bigEnd and smallEnd between computer and network.
 
