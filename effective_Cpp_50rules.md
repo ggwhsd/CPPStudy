@@ -150,6 +150,76 @@ new和delete要成对使用，如果表达式中使用了[]，则相应的delete
 
 让接口容易被使用，不易被误用。
 
-这条我觉得是开发中，每个专业程序员都应该知晓的。
+## 条款【19】
+
+设计class犹如设计type，在c++中，每设计一个新的class，就是设计一个新type。好的type有自然的语法、直观的语义，以及一或者多个高效实现品。
+
+在设计一个新的type时，要回答如下问题：
+
+* 新对象如何被创建和销毁？
+* 初始化和赋值该有什么样的差别？
+* 新的type对象如果被passed by value，意味着什么？也就是copy构造函数是否要考虑。
+* 新type的合法值是什么？也就是约束条件
+* 新type是否要配合继承关系？
+* 新type需要什么样的转换？
+* 什么样的操作符和函数对此新type而言是合理的？
+* 什么样的标准函数应该驳回？这些函数要声明为private。
+* 新的type是否需要一般化？如果需要一般化，就得考虑顶一个新的class template。
+* 最后一个，真的需要一个新type？是否可以在原有type上新增函数或者template？
+
+## 条款【20】
+
+尽量以`pass-by-reference-to-const`替代`pass-by-value`。前者通常比较高效，并可避免切割问题。（子类被切割成父类）
+
+以上规则不适用于内置类型、STL的迭代器和函数对象。
+
+## 条款【21】
+
+绝不要让reference和pointer指向一个local stack对象。或者返回reference指向一个heap-allocated对象，因为reference无法释放对象。
 
 
+## 条款【22】
+
+成员变量声明为private。这个我一直都是这么开发的，对于状态的维护、约束以及多线程操作，会减少很多不必要的问题。
+
+## 条款【23】
+
+用non-member non-friend函数替换member函数。 因为封装性前者比后者更高。
+
+什么时候需要这样考虑呢？比如一个类中有多个member函数，如果每次都要依次调用这些member函数，会很烦，此时写一个member来调用这些函数。
+
+对于写习惯了java代码的程序员你来说，可能会考虑使用类中的static member来替换member。  不过c++的做法，可以在某个命名空间中，使用c的函数来替换member。
+
+## 条款【24】
+
+如果需要为某个函数的所有参数进行类型转换，请使用non-member的设计。  我开发到现在，没有使用过这种情况，要么转换好了给函数调用，要么提供重载方式，亦或者使用模板，也就不会出现参数进行类型转换了。牺牲一点便利性，就可以跳过这条条款。
+
+## 条款【25】
+
+考虑写出一个不抛出异常的`swap`函数。这是一个调换两个对象的函数。`std::swap`有一个默认的模板实现。
+
+## 条款【26】
+
+尽可能延后定义变量，这样可以增加程序的清晰度并改善程序性能，比如：
+
+	void test(const string& value)
+	{
+		string str1;
+		if(value=="" || value.lenght()<10)
+			return;
+		else
+			str1=value;
+	}
+
+改为
+
+	void test(const string& value)
+	{
+		
+		if(value=="" || value.lenght()<10)
+			return;
+		else
+		{
+			string str1(value);
+		}
+	}
