@@ -223,3 +223,11 @@ new和delete要成对使用，如果表达式中使用了[]，则相应的delete
 			string str1(value);
 		}
 	}
+	
+## 条款【27】
+
+尽量少做转型。
+
+c++中提供了四种类型转换：`const_cast<T>(expression)`,`dynamic_cast<T>(express)`,`reinterpret_cast<T>(express)`,`static_cast<T>(express)`。常用的const_cast和static_cast。
+
+
