@@ -115,6 +115,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\a\Desktop\GUGW\03CPPcode\20CPPPractice\VS2017Project\Practice\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>ws2_32.lib;wsock32.lib;libevent.lib;libevent_core.lib;libevent_extras.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -151,6 +152,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>LIBCMT;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -158,6 +160,7 @@
     <ClInclude Include="exceptionStudy.h" />
     <ClInclude Include="JSONStudy.h" />
     <ClInclude Include="libeventHello.h" />
+    <ClInclude Include="libEventProxy.h" />
     <ClInclude Include="libevent_EvbufferStudy.h" />
     <ClInclude Include="NetBigEndStudy.h" />
     <ClInclude Include="NLOHMANN_JSON.h" />

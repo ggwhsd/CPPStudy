@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <winsock2.h>
 #include <string>
 /*
  * 0x12345678   16进制，两个数就是一字节,12 34 56 78 这是四个字节。
