@@ -46,12 +46,42 @@ class ServerLib
 	{
 	public:
 		~ServerLib() { delete server; };
-		ServerLib() { server = nullptr; };
+		ServerLib():msg("center data"),server(nullptr), base(nullptr){ };
 		
+
+
+		int start()
+		{
+			testLibeventHello();
+		}
+		
+		void startByNewThread()
+		{
+			
+			server = new thread(&ServerLib::testLibeventHello,this);
+			server->detach();
+		}
+
+
+
+		event_base * getBase()
+		{
+			return base;
+		}
+
+		const string& getData()
+		{
+			return msg;
+		}
+		void setData(string s)
+		{
+			msg = s;
+		}
+	private:
 
 		int testLibeventHello()
 		{
-			
+
 			struct evconnlistener *listener;
 			struct event *signal_event;
 
@@ -98,30 +128,6 @@ class ServerLib
 
 			printf("done\n");
 			return 0;
-		}
-
-		
-		void init()
-		{
-			msg = "center data";
-			server = new thread(&ServerLib::testLibeventHello,this);
-			server->detach();
-		}
-
-
-
-		event_base * getBase()
-		{
-			return base;
-		}
-
-		const string& getData()
-		{
-			return msg;
-		}
-		void setData(string s)
-		{
-			msg = s;
 		}
 
 	private:
