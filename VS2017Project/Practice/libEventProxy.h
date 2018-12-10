@@ -27,7 +27,7 @@
 #include <event2/listener.h>
 #include <event2/util.h>
 #include <event2/event.h>
-
+#include <conio.h>
 #include "./chronoStudy.h"
 
 	static const char MESSAGE1[] = "Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!\r\n";
@@ -125,7 +125,9 @@ class ServerLib
 			event_free(signal_event);
 			//释放循环监听和分发
 			event_base_free(base);
-
+#ifdef WIN32
+			WSACleanup();
+#endif
 			printf("done\n");
 			return 0;
 		}
@@ -242,9 +244,15 @@ signal_cb1(evutil_socket_t sig, short events, void *user_data)
 
 
 
+int tcp_connect_server(const char *server_ip, int port);
+void cmd_msg_cb(evutil_socket_t fd, short events, void *arg);
+void server_msg_cb(bufferevent *bev, void *arg);
+void event_cb(bufferevent *bev, short event, void *arg);
 
 class ClientLib
 {
+private:
+	event_base * base;
 public:
 	void init()
 	{
@@ -260,7 +268,9 @@ public:
 		int y = event_base_dispatch(base); //事件循环。因为我们这边没有注册事件，所以会直接退出  
 		event_base_free(base);  //销毁libevent  
 		
-
+#ifdef WIN32
+		WSACleanup();
+#endif
 
 	}
 
@@ -304,6 +314,115 @@ public:
 
 		shutdown(client_fd, 2); //关闭socket    
 	
+#ifdef WIN32
+		WSACleanup();
+#endif
+	}
+
+	void LibEventStart()
+	{
+#ifdef _WIN32
+		WSADATA wsa_data;
+		WSAStartup(0x0201, &wsa_data);
+#endif
+		puts("init a event_base!");
+		base = event_base_new();
+
+		//第二个参数为-1，表示后续使用bufferevent_socket_connect再绑定socket和bufferevent
+		struct bufferevent* bev = bufferevent_socket_new(base, -1,BEV_OPT_CLOSE_ON_FREE);
+
+		struct sockaddr_in server_addr; //服务器端    
+		memset(&server_addr, 0, sizeof(server_addr)); //数据初始化--清零      
+		server_addr.sin_family = AF_INET; //设置为IP通信      
+		inet_pton(server_addr.sin_family, "127.0.0.1", &server_addr.sin_addr);//服务器IP地址      
+		server_addr.sin_port = htons(9995); //服务器端口号   
+		//绑定socket和bev的关系。
+		int rtn_socket =bufferevent_socket_connect(bev, (sockaddr *)&server_addr, sizeof(server_addr));
+		if (rtn_socket < 0)
+			cout << "bufferevent_socket_connect is fail" << endl;
+
+		/*
+		这个时linux下的监听终端输入方法
+
+		//创建输入终端的事件，参数为与socket绑定的bufferevent*类型的bev，这样如果输入，就可以调用bev进行发送数据。
+		event *ev_cmd = event_new(base, 1, EV_READ | EV_PERSIST, cmd_msg_cb, (void *)bev);
+		//注册事件，第二个参数时超时，NULL为永远不超时。
+		int rtn = event_add(ev_cmd, NULL);
+		if (rtn <0)
+			cout << "event_add is fail" << endl;
+			*/
+
+		//windows下，使用循环检查是否有输入，使用kbhit()这个事件
+		
+		struct event *ev_cmd = event_new(base, -1, EV_PERSIST, cmd_msg_cb, (void *)bev);
+		struct timeval wait_time = { 0, 100 };
+		event_add(ev_cmd, &wait_time);
+		
+		//注册bev的事件
+		bufferevent_setcb(bev, server_msg_cb, NULL, event_cb, NULL);
+		bufferevent_enable(bev, EV_READ | EV_PERSIST);
+
+
+
+		int y = event_base_dispatch(base);
+		event_base_free(base);  //销毁libevent  
+
+#ifdef WIN32
+		WSACleanup();
+#endif
 
 	}
 };
+
+void cmd_msg_cb(evutil_socket_t fd, short events, void *arg) {
+	char msg[1024];
+	int i = 0;
+	if (_kbhit())
+	{
+		char cInput = EOF;
+		do
+		{
+			//读取键盘输入并回显 不用getchar 因为getchar要等用户按回车才能获取
+			int nInput = (char)_getch();
+			cInput = (char)nInput;
+			//这里最好用putch 不用putchar 因为有时是读取到非可视化字符，如方向键
+			_putch(nInput);
+			msg[i] = cInput;
+				i++;
+		} while (_kbhit());
+		msg[i] = '\0';
+	}
+
+	bufferevent *bev = (bufferevent *)arg;
+	bufferevent_write(bev, msg, i);
+}
+
+void server_msg_cb(bufferevent *bev, void *arg) {
+	char msg[1024];
+
+	size_t len = bufferevent_read(bev, msg, sizeof(msg) - 1);
+	msg[len] = '\0';
+
+	printf("Recv %s from server.\n", msg);
+}
+
+void event_cb(bufferevent *bev, short event, void *arg) {
+	if (event & BEV_EVENT_EOF) {
+		printf("Connection closed.\n");
+	}
+	else if (event & BEV_EVENT_ERROR) {
+		printf("Some other error.\n");
+	}
+	else if (event & BEV_EVENT_CONNECTED) {
+		printf("Client has successfully cliented.\n");
+		return;
+	}
+
+	bufferevent_free(bev);
+
+	// free event_cmd
+	// need struct as event is defined as parameter
+	struct event *ev = (struct event *)arg;
+	event_free(ev);
+}
+
