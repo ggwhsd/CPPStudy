@@ -20,8 +20,13 @@ using C++ 11  ,vs2017
 
 * [effective c++](./effective_Cpp_50rules.md) 是当做读书笔记，结合工作中会用到的，做了记录，不会用到的，可能只是记个规则。
 
-* libEventProxy.h 简单封装了libevent为一个类来使用，简化了使用方式，如下。
+* libEventProxy.h 简单封装了libevent为一个server类来使用，简化了使用方式，如下。
 
 	ServerLib server;
 	server.startByNewThread();
+
+* libEventProxy.h 封装了一个基于socket的client类。
+
+	ClientLib client;
+	client.SocketStart();
 	
