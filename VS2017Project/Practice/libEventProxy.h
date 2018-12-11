@@ -352,7 +352,7 @@ public:
 			cout << "event_add is fail" << endl;
 			*/
 
-		//windows下，使用循环检查是否有输入，使用kbhit()这个事件
+		//windows下，使用循环检查是否有输入，这个事件没有句柄，就是一个定时器。
 		
 		struct event *ev_cmd = event_new(base, -1, EV_PERSIST, cmd_msg_cb, (void *)bev);
 		struct timeval wait_time = { 0, 100 };
