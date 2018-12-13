@@ -55,6 +55,13 @@ namespace JSONSTUDY {
 
 		json::iterator it = j.begin();
 		cout << it.key() << " " << it.value() << endl;
+
+	
+		if (j["dd"] == NULL)
+			cout << "NULL" << endl;
+		if (j["dd"] == nullptr)
+			cout << "nullptr" << endl;
+
 	}
 	void JsonCreateMethod2()
 	{
