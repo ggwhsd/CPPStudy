@@ -8,14 +8,30 @@
  * unique_lock的效率是低于lock_guard的，但是灵活性高。
  * 
  * 同时如下示例，也提供了如何在类中对线程进行创建和处理，可用于面向对象编程。
+ * 
+ * 性能对比：testThread_condition_variable() 对比使用notify与mutex检测之间的时间延迟，在windows上基本上没有什么差距。
 */
 #include <thread>
 #include <queue>
 #include <iostream>
 #include <mutex>
 #include <condition_variable>
+#include "./chronoStudy.h"
 using namespace std;
 
+string testResult;
+struct timeConsume {
+	long send_time;
+	long receive_time;
+	long diff()
+	{
+		return receive_time - send_time;
+	}
+};
+
+long avg1 = 0;
+long avg2 = 0;
+long avg3 = 0;
 
 class Thread_condition_variable
 {
@@ -23,34 +39,40 @@ class Thread_condition_variable
 public:
 	void data_preparation_thread()
 	{
-		cout << "preparation\n";
-		lock_guard<mutex> lk(mut);
-		cout << "lock guard\n";
-		this_thread::sleep_for(chrono::milliseconds(5000));
-		data_queue.push(1);
 		
+		this_thread::sleep_for(chrono::milliseconds(500));
+		
+		lock_guard<mutex> lk(mut);
+		data_queue.push(1);
+		tt.send_time = getMicroSeconds();
 		data_cond.notify_one();
-		cout << "notify\n";
+		
+		
+		
 	}
 
 	void data_processing_thread()
 	{
-		cout << "process begin\n";
 		unique_lock<mutex> lk(mut);
-		cout << "unique lock\n";
+		
 		data_cond.wait(lk, [this] {return !data_queue.empty(); });
-		cout << "wait\n";
+		tt.receive_time = getMicroSeconds();
 		data_queue.pop();
 		lk.unlock();
 	}
 
 	void init()
 	{
+		tt.receive_time = 0;
+		tt.send_time = 0;
 		t0 = new thread(&Thread_condition_variable::data_preparation_thread,this);
-		std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+		std::this_thread::sleep_for(std::chrono::milliseconds(300));
 		t1 = new thread(&Thread_condition_variable::data_processing_thread, this);
 		t1->join();
 		t0->detach();
+	
+		cout << "用notify_one来进行线程同步: 耗时微秒 = [" << tt.diff() << "]" << endl;
+		avg1 = (avg1 + tt.diff());
 
 	}
 private:
@@ -59,11 +81,123 @@ private:
 	condition_variable data_cond;
 	thread *t0;
 	thread *t1;
+	timeConsume tt;
 };
+
+
+
+class Thread_LockGuardmutex
+{
+
+public:
+	void data_preparation_thread()
+	{
+		
+		lock_guard<mutex> lk(mut);
+		this_thread::sleep_for(chrono::milliseconds(500));
+		data_queue.push(1);
+		tt.send_time = getMicroSeconds();
+		
+	}
+
+	void data_processing_thread()
+	{
+		
+		lock_guard<mutex> lk(mut);
+		tt.receive_time = getMicroSeconds();
+		data_queue.pop();
+	}
+
+	void init()
+	{
+		tt.receive_time = 0;
+		tt.send_time = 0;
+		t0 = new thread(&Thread_LockGuardmutex::data_preparation_thread, this);
+		std::this_thread::sleep_for(std::chrono::milliseconds(300));
+		t1 = new thread(&Thread_LockGuardmutex::data_processing_thread, this);
+		t1->join();
+		t0->detach();
+		cout <<"用lock guard<mutex>进行线程同步: 耗时微秒 = ["<< tt.diff() <<"]" << endl;
+		avg2 = (avg2 + tt.diff());
+
+	}
+private:
+	mutex mut;
+	queue<int> data_queue;
+	condition_variable data_cond;
+	thread *t0;
+	thread *t1;
+	timeConsume tt;
+};
+
+
+class Thread_mutex
+{
+
+public:
+	void data_preparation_thread()
+	{
+
+		mut.lock();
+		this_thread::sleep_for(chrono::milliseconds(500));
+		data_queue.push(1);
+		tt.send_time = getMicroSeconds();
+		mut.unlock();
+		
+
+	}
+
+	void data_processing_thread()
+	{
+
+		mut.lock();
+		tt.receive_time = getMicroSeconds();
+		data_queue.pop();
+		mut.unlock();
+	}
+
+	void init()
+	{
+		tt.receive_time = 0;
+		tt.send_time = 0;
+		t0 = new thread(&Thread_mutex::data_preparation_thread, this);
+		std::this_thread::sleep_for(std::chrono::milliseconds(300));
+		t1 = new thread(&Thread_mutex::data_processing_thread, this);
+		t1->join();
+		t0->detach();
+		cout << "用mutex.lock进行线程同步: 耗时微秒 = [" << tt.diff() << "]" << endl;
+		avg3 = (avg3 + tt.diff());
+
+	}
+private:
+	mutex mut;
+	queue<int> data_queue;
+	condition_variable data_cond;
+	thread *t0;
+	thread *t1;
+	timeConsume tt;
+};
+
 
 
 void testThread_condition_variable()
 {
-	Thread_condition_variable tcv;
+
+	int i = 0; while (i < 60) { 
+	cout << "------------------------------------------" << i << "---------------------" << endl; Thread_condition_variable tcv;
 	tcv.init();
+	Thread_LockGuardmutex tlgm;
+	tlgm.init();
+	Thread_mutex tm;
+	tm.init(); i++; }
+	testAvgResult(i);
+	
+}
+
+void testAvgResult(int i)
+{
+	cout << "平均耗时:" << endl;
+	cout << avg1 / i << endl;
+	cout << avg2 / i << endl;
+	cout << avg3 / i << endl;
 }

@@ -186,7 +186,7 @@ void testSystemClock_microSeconds()
 	
 	char mircostr[8];
 	mircostr[7] = '\0';
-	sprintf_s(mircostr,".%06d", (int)(tp2.time_since_epoch().count() % (1000000)));
+	sprintf_s(mircostr,".%06d", static_cast<int>(tp2.time_since_epoch().count() % (1000000)));
 	cout << mircostr << endl;
 	string str(timebuf);
 	
@@ -210,8 +210,21 @@ string getSystemClock_microSeconds()
 	strftime(timebuf, 30, "%F %R:%S", &ltm);
 	char mircostr[8];
 	mircostr[7] = '\0';
-	sprintf_s(mircostr, ".%06d", (int)(tp2.time_since_epoch().count() % (1000000)));
+	sprintf_s(mircostr, ".%06d", static_cast<int>(tp2.time_since_epoch().count() % (1000000)));
 	string str(timebuf);
 	str.append(mircostr);
 	return str;
+}
+
+typedef chrono::time_point<chrono::steady_clock, chrono::microseconds> microSClock_type;
+long getMicroSeconds_steady()
+{
+	microSClock_type tp2 = chrono::time_point_cast<chrono::microseconds>(chrono::steady_clock::now());
+	return (tp2.time_since_epoch().count());
+}
+
+long getMicroSeconds()
+{
+	microClock_type tp2 = chrono::time_point_cast<chrono::microseconds>(chrono::system_clock::now());
+	return (tp2.time_since_epoch().count());
 }
