@@ -179,6 +179,14 @@ private:
 };
 
 
+void testAvgResult(int i)
+{
+	cout << "平均耗时:" << endl;
+	cout << avg1 / i << endl;
+	cout << avg2 / i << endl;
+	cout << avg3 / i << endl;
+}
+
 
 void testThread_condition_variable()
 {
@@ -192,12 +200,4 @@ void testThread_condition_variable()
 	tm.init(); i++; }
 	testAvgResult(i);
 	
-}
-
-void testAvgResult(int i)
-{
-	cout << "平均耗时:" << endl;
-	cout << avg1 / i << endl;
-	cout << avg2 / i << endl;
-	cout << avg3 / i << endl;
 }

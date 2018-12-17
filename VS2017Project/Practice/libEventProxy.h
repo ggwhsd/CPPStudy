@@ -139,6 +139,18 @@ class ServerLib
 
 	};
 
+void displayIP(evutil_socket_t fd)
+{
+	struct sockaddr_in sa1;
+	int len1 = sizeof(sa1);
+	char ip[20];
+	if (!getpeername(fd, (struct sockaddr *)&sa1, &len1))
+	{
+		inet_ntop(((struct sockaddr_in *)&sa1)->sin_family, &((struct sockaddr_in *)&sa1)->sin_addr, ip, INET_ADDRSTRLEN);
+		printf("对方IP：%s ", ip);
+		printf("对方PORT：%d ", ntohs(((struct sockaddr_in *)&sa1)->sin_port));
+	}
+}
 
 void
 listener_cb1(struct evconnlistener *listener, evutil_socket_t fd,
@@ -155,6 +167,9 @@ listener_cb1(struct evconnlistener *listener, evutil_socket_t fd,
 		event_base_loopbreak(base);
 		return;
 	}
+	
+	displayIP(fd);
+
 	bufferevent_setcb(bev, conn_readcb1, conn_writecb1, conn_eventcb1, user);
 	bufferevent_enable(bev, EV_WRITE);
 	bufferevent_enable(bev, EV_READ);
@@ -202,6 +217,7 @@ conn_readcb1(struct bufferevent *bev, void *user_data)
 	char line[256];
 	int n;
 	evutil_socket_t fd = bufferevent_getfd(bev);
+
 	while (n = bufferevent_read(bev, line, 255), n > 0)
 	{
 		line[n] = '\0';
@@ -358,6 +374,8 @@ public:
 		struct timeval wait_time = { 0, 100 };
 		event_add(ev_cmd, &wait_time);
 		
+
+
 		//注册bev的事件
 		bufferevent_setcb(bev, server_msg_cb, NULL, event_cb, NULL);
 		bufferevent_enable(bev, EV_READ | EV_PERSIST);

@@ -168,6 +168,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="STLMap.h" />
     <ClInclude Include="STLVector.h" />
+    <ClInclude Include="streamStudy.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Thread_condition_variable.h" />
     <ClInclude Include="WindowsFileApi.h" />
