@@ -17,7 +17,7 @@ void xmlRead()
 void xmlRead2()
 {
 	tinyxml2::XMLDocument doc;
-	doc.LoadFile("test2.xml");
+	doc.LoadFile(".\\testResource\\test2.xml");
 	XMLElement *scene = doc.RootElement();
 	XMLElement *surface = scene->FirstChildElement("node");
 	while (surface)
@@ -41,7 +41,7 @@ void xmlRead2()
 void xmlReadWrite3()
 {
 	tinyxml2::XMLDocument doc;
-	doc.LoadFile("test3.xml");
+	doc.LoadFile(".\\testResource\\test3.xml");
 	XMLElement *scene = doc.RootElement();
 	XMLElement *surface = scene->FirstChildElement("node");
 	while (surface)
@@ -59,7 +59,7 @@ void xmlReadWrite3()
 		}
 		surface = surface->NextSiblingElement();
 	}
-	doc.SaveFile("test3.xml");
+	doc.SaveFile(".\\testResource\\test3.xml");
 }
 
 void xmlReadWrite4()
@@ -77,6 +77,6 @@ void xmlReadWrite4()
 	pSecond->SetAttribute("ss1", 1);
 	pFirst->InsertEndChild(pSecond);
 
-	doc.SaveFile("test4.xml");
+	doc.SaveFile(".\\testResource\\test4.xml");
 
 }

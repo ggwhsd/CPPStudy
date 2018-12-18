@@ -49,6 +49,7 @@ public:
 	void LogFatal(const string&);
 	void LogError(const string&);
 	void LogWarning(const string&);
+
 };
 
 
