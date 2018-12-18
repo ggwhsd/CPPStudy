@@ -37,8 +37,8 @@ public:
 	~GGWlogger();
 	///设置日志记录级别，大于等于该级别的日志才能记录到日志中。
 	void SetLevel(LOGLEVEL);
-	void WriteLog_ThreadSafe(LOGLEVEL, const string&);
-	void WriteLog(LOGLEVEL, const string&);
+	void WriteLog_ThreadSafe(const string&, LOGLEVEL);
+	void WriteLog(const string&, LOGLEVEL);
 	string LevelMsg(LOGLEVEL level);
 	string getSystemClock_microSeconds();
 	string  getDAYHHMMSS();
@@ -114,24 +114,24 @@ void GGWlogger::FileLogOpen(bool flag)
 	}
 }
 
-void GGWlogger::WriteLog_ThreadSafe(LOGLEVEL level, const string& str)
+void GGWlogger::WriteLog_ThreadSafe(const string& str, LOGLEVEL level = LOGLEVEL::LOG_INFO)
 {
 	if (level >= logLevel)
 	{
 		lock.lock();
-		_logFile << getSystemClock_microSeconds() << " " << LevelMsg(level) << str.c_str() << endl;
+		_logFile << getSystemClock_microSeconds() << LevelMsg(level) << str.c_str() << endl;
 		lock.unlock();
 	}
 }
 
-void GGWlogger::WriteLog(LOGLEVEL level, const string & str)
+void GGWlogger::WriteLog(const string & str, LOGLEVEL level = LOGLEVEL::LOG_INFO)
 {
 	if (level >= logLevel)
 	{
 		if (_logFile.good())
 		{
 
-			_logFile << getSystemClock_microSeconds() << " " << LevelMsg(level) << str.c_str() << endl;;
+			_logFile << getSystemClock_microSeconds() << LevelMsg(level) << str.c_str() << endl;;
 
 		}
 	}

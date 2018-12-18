@@ -43,7 +43,8 @@ using C++ 11  ,vs2017
 ```cpp
 	GGWlogger mylogger("testfile");
 	mylogger.SetLevel(LOGLEVEL::LOG_DEBUG);
-	mylogger.WriteLog(LOGLEVEL::LOG_INFO, "hhhhhhh");
+	mylogger.WriteLog( "hhhhhhh", LOGLEVEL::LOG_INFO);
+	mylogger.WriteLog("hhhhhhh");
 ```
 
 
