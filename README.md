@@ -44,7 +44,9 @@ using C++ 11  ,vs2017
 	GGWlogger mylogger("testfile");
 	mylogger.SetLevel(LOGLEVEL::LOG_DEBUG);
 	mylogger.WriteLog( "hhhhhhh", LOGLEVEL::LOG_INFO);
+	mylogger.LogInfo("hhhhhhh");
 	mylogger.WriteLog("hhhhhhh");
+	
 ```
 
 * [xmlStudy.h](./VS2017Project/Practice/xmlStudy.h) 如何使用`tinyxml2`库进行xml文件的读写使用。
