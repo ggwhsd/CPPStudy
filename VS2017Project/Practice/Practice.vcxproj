@@ -162,6 +162,7 @@
     <ClInclude Include="libeventHello.h" />
     <ClInclude Include="libEventProxy.h" />
     <ClInclude Include="libevent_EvbufferStudy.h" />
+    <ClInclude Include="logger.h" />
     <ClInclude Include="NetBigEndStudy.h" />
     <ClInclude Include="NLOHMANN_JSON.h" />
     <ClInclude Include="shardPtrStudy.h" />
