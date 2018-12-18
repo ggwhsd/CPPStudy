@@ -47,4 +47,6 @@ using C++ 11  ,vs2017
 	mylogger.WriteLog("hhhhhhh");
 ```
 
+* [xmlStudy.h](./VS2017Project/Practice/xmlStudy.h) 如何使用`tinyxml2`库进行xml文件的读写使用。
+
 
