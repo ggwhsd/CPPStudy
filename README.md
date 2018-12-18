@@ -22,15 +22,17 @@ using C++ 11  ,vs2017
 
 * [libEventProxy.h](./VS2017Project/Practice/libEventProxy.h) 简单封装了`libevent`为一个server类来使用，简化了使用方式，如下。
 
+```cpp
    ServerLib server;
    server.startByNewThread();
-
+```
 
 * [libEventProxy.h](./VS2017Project/Practice/libEventProxy.h) 封装了一个基于`socket`的client类。
 
+```cpp
    ClientLib client;
    client.SocketStart();
-
+```
 
 * [STLMap.h](./VS2017Project/Practice/STLMap.h) 使用map容器
 
@@ -38,7 +40,7 @@ using C++ 11  ,vs2017
 
 * [logger.h](./VS2017Project/Practice/logger.h) 一个自己开发的简约日志库，实现了设置日志级别，以及线程安全记录。只要引用这个头文件，就可以使用，非常简单。
 
-```c++
+```cpp
 	GGWlogger mylogger("testfile");
 	mylogger.SetLevel(LOGLEVEL::LOG_DEBUG);
 	mylogger.WriteLog(LOGLEVEL::LOG_INFO, "hhhhhhh");
