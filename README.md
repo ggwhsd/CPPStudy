@@ -37,10 +37,10 @@ using C++ 11  ,vs2017
 * [STLVector.h](./VS2017Project/Practice/STLVector.h) 使用`vector`，以及内存地址变化。
 
 * [logger.h](./VS2017Project/Practice/logger.h) 一个自己开发的简约日志库，实现了设置日志级别，以及线程安全记录。只要引用这个头文件，就可以使用，非常简单。
-	
+
 	GGWlogger mylogger("testfile");
 	mylogger.SetLevel(LOGLEVEL::LOG_DEBUG);
 	mylogger.WriteLog(LOGLEVEL::LOG_INFO, "hhhhhhh");
-	
+
 
 
