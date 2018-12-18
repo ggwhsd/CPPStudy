@@ -44,6 +44,11 @@ public:
 	string  getDAYHHMMSS();
 
 	string getLogFileName();
+	void LogDebug(const string&);
+	void LogInfo(const string&);
+	void LogFatal(const string&);
+	void LogError(const string&);
+	void LogWarning(const string&);
 };
 
 
@@ -172,4 +177,28 @@ string GGWlogger::LevelMsg(LOGLEVEL level)
 		}
 		break;
 	}
+}
+void GGWlogger::LogDebug(const string & str)
+{
+	WriteLog(str, LOG_DEBUG);
+}
+
+void GGWlogger::LogInfo(const string & str)
+{
+	WriteLog(str, LOG_INFO);
+}
+
+void GGWlogger::LogFatal(const string & str)
+{
+	WriteLog(str, LOG_FATAL);
+}
+
+void GGWlogger::LogError(const string & str)
+{
+	WriteLog(str, LOG_ERROR);
+}
+
+void GGWlogger::LogWarning(const string &str)
+{
+	WriteLog(str, LOG_WARNING);
 }
