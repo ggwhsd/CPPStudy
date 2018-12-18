@@ -37,8 +37,8 @@ public:
 	~GGWlogger();
 	///设置日志记录级别，大于等于该级别的日志才能记录到日志中。
 	void SetLevel(LOGLEVEL);
-	void WriteLog_ThreadSafe(const string&, LOGLEVEL);
-	void WriteLog(const string&, LOGLEVEL);
+	void WriteLog_ThreadSafe(const string&, LOGLEVEL level = LOGLEVEL::LOG_INFO);
+	void WriteLog(const string&, LOGLEVEL level = LOGLEVEL::LOG_INFO);
 	string LevelMsg(LOGLEVEL level);
 	string getSystemClock_microSeconds();
 	string  getDAYHHMMSS();
