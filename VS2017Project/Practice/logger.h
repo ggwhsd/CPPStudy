@@ -114,7 +114,7 @@ void GGWlogger::FileLogOpen(bool flag)
 	}
 }
 
-void GGWlogger::WriteLog_ThreadSafe(const string& str, LOGLEVEL level = LOGLEVEL::LOG_INFO)
+void GGWlogger::WriteLog_ThreadSafe(const string& str, LOGLEVEL level)
 {
 	if (level >= logLevel)
 	{
@@ -124,7 +124,7 @@ void GGWlogger::WriteLog_ThreadSafe(const string& str, LOGLEVEL level = LOGLEVEL
 	}
 }
 
-void GGWlogger::WriteLog(const string & str, LOGLEVEL level = LOGLEVEL::LOG_INFO)
+void GGWlogger::WriteLog(const string & str, LOGLEVEL level)
 {
 	if (level >= logLevel)
 	{
