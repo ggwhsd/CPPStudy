@@ -15,6 +15,13 @@ double test1(string str)
 auto test2 = [](string str ) { return stod(str); };
 
 
+class Foo {
+public:
+	Foo(int num) : num_(num) {}
+	void print_add(int i) const { std::cout << num_ + i << '\n'; }
+	int num_;
+};
+
 void FunctionTest()
 {
 	ff = test1;
@@ -23,6 +30,10 @@ void FunctionTest()
 	ff = test2;
 	cout<< ff("321.33")<<endl;
 
+	std::function<void(const Foo&, int)> f_add_display = &Foo::print_add;
+	const Foo foo(314159);
+	f_add_display(foo, 1);
+	f_add_display(314159, 1);
 
 
 }
