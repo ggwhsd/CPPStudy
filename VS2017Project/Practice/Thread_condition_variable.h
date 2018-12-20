@@ -201,3 +201,69 @@ void testThread_condition_variable()
 	testAvgResult(i);
 	
 }
+
+
+
+
+
+class TasksManager
+{
+
+public:
+	void wait()
+	{
+
+		auto thr = thr_consumeTasks.cbegin();
+		while (thr != thr_consumeTasks.cend())
+		{
+
+			unique_lock<mutex> lk(mut);
+			this_thread::sleep_for(chrono::milliseconds(10000));
+			data_cond.wait(lk, [this] {return !data_queue.empty(); });
+			
+			cout << "id="<< (*thr)->get_id() << endl;
+			data_queue.pop();
+			lk.unlock();
+			thr++;
+		}
+	}
+
+	void notify()
+	{
+		
+		
+
+		lock_guard<mutex> lk(mut);
+		this_thread::sleep_for(chrono::milliseconds(1000));
+		data_queue.push(1);
+		data_cond.notify_one();
+
+		
+
+	}
+
+	void init()
+	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(500));
+		
+		cout << "用notify_one来进行线程同步: 耗时微秒 = [" << tt.diff() << "]" << endl;
+		
+
+	}
+
+	void addProduceTask(thread * produceTask)
+	{
+		thr_produceTask.push_back(produceTask);
+	}
+	void addConsumeTaks(thread * consumeTask)
+	{
+		thr_consumeTasks.push_back(consumeTask);
+	}
+private:
+	mutex mut;
+	queue<int> data_queue;
+	condition_variable data_cond;
+	vector<thread *> thr_produceTask;
+	vector<thread *> thr_consumeTasks;
+	timeConsume tt;
+};

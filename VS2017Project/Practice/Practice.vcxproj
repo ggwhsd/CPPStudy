@@ -157,6 +157,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="chronoStudy.h" />
+    <ClInclude Include="Cpp11_Function_Study.h" />
     <ClInclude Include="exceptionStudy.h" />
     <ClInclude Include="JSONStudy.h" />
     <ClInclude Include="libeventHello.h" />
