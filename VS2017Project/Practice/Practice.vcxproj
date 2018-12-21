@@ -173,6 +173,8 @@
     <ClInclude Include="STLVector.h" />
     <ClInclude Include="streamStudy.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="ThreadPoolsStudy.h" />
+    <ClInclude Include="ThreadsWaitNotifyManager.h" />
     <ClInclude Include="Thread_condition_variable.h" />
     <ClInclude Include="WindowsFileApi.h" />
     <ClInclude Include="xmlStudy.h" />
