@@ -53,4 +53,4 @@ using C++ 11  ,vs2017
 
 * [Cpp11_Function_Study.h](./VS2017Project/Practice/Cpp11_Function_Study.h) 介绍了C++11中引入的Function，相当于是以前C语言中的函数指针，但是可以封装很好，可以分装各种函数。也介绍了右值引用&&，这个也是C++11中新引入的机制，对于提升内存使用效率很有用。
 
-
+* [ThreadsWaitNotifyManager.h](./VS2017Project/Practice/ThreadsWaitNotifyManager.h) 用于多线程之间通信的一个类。
