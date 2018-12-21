@@ -19,9 +19,8 @@ public:
 	string wait()
 	{
 		string data("");
+		
 			unique_lock<mutex> lk(mut);
-			//lk.unlock();
-			
 			cout << getSystemClock_microSeconds() << "before wait" << endl;
 			data_cond.wait(lk, [this] {return !data_queue.empty(); });
 			cout << getSystemClock_microSeconds()<<"after wait" << endl;
@@ -37,13 +36,15 @@ public:
 
 	void notify(string&& message)
 	{
-		this_thread::sleep_for(chrono::milliseconds(5000));
+		
 		lock_guard<mutex> lk(mut);
+	
 		data_queue.push(message);
 		cout << getSystemClock_microSeconds() << "send a message"<< message.c_str() << endl;
 		data_cond.notify_one();
 		cout << getSystemClock_microSeconds() << "notify_one" << endl;
 
+	
 		
 
 	}
