@@ -54,7 +54,6 @@ public:
 	void data_processing_thread()
 	{
 		unique_lock<mutex> lk(mut);
-		
 		data_cond.wait(lk, [this] {return !data_queue.empty(); });
 		tt.receive_time = getMicroSeconds();
 		data_queue.pop();
@@ -192,7 +191,8 @@ void testThread_condition_variable()
 {
 
 	int i = 0; while (i < 60) { 
-	cout << "------------------------------------------" << i << "---------------------" << endl; Thread_condition_variable tcv;
+	cout << "------------------------------------------" << i << "---------------------" << endl; 
+	Thread_condition_variable tcv;
 	tcv.init();
 	Thread_LockGuardmutex tlgm;
 	tlgm.init();
@@ -200,6 +200,76 @@ void testThread_condition_variable()
 	tm.init(); i++; }
 	testAvgResult(i);
 	
+}
+
+
+
+
+class Thread_condition
+{
+
+public:
+	void data_preparation_thread()
+	{
+
+		this_thread::sleep_for(chrono::milliseconds(500));
+
+		lock_guard<mutex> lk(mut);
+		data_queue.push(1);
+		tt.send_time = getMicroSeconds();
+		data_cond.notify_one();
+		cout << "after notify_one" << endl;
+		this_thread::sleep_for(chrono::milliseconds(10000));
+		cout << "after sleep" << endl;
+
+
+
+	}
+
+	void data_processing_thread()
+	{
+		unique_lock<mutex> lk(mut);
+		cout << "before wait" << endl;
+		data_cond.wait(lk, [this] {return !data_queue.empty(); });
+		cout << "after wait" << endl;
+		tt.receive_time = getMicroSeconds();
+		data_queue.pop();
+		lk.unlock();
+	}
+
+	void init()
+	{
+		tt.receive_time = 0;
+		tt.send_time = 0;
+		t0 = new thread(&Thread_condition::data_preparation_thread, this);
+		std::this_thread::sleep_for(std::chrono::milliseconds(300));
+		t1 = new thread(&Thread_condition::data_processing_thread, this);
+		t1->join();
+		t0->detach();
+
+		cout << "用notify_one来进行线程同步: 耗时微秒 = [" << tt.diff() << "]" << endl;
+		avg1 = (avg1 + tt.diff());
+
+	}
+private:
+	mutex mut;
+	queue<int> data_queue;
+	condition_variable data_cond;
+	thread *t0;
+	thread *t1;
+	timeConsume tt;
+};
+
+void testThread_condition()
+{
+
+	
+		
+	Thread_condition tcv;
+		tcv.init();
+	
+
+
 }
 
 
@@ -220,7 +290,8 @@ public:
 			unique_lock<mutex> lk(mut);
 			this_thread::sleep_for(chrono::milliseconds(10000));
 			data_cond.wait(lk, [this] {return !data_queue.empty(); });
-			
+			cout << "after wait" << endl;
+			this_thread::sleep_for(chrono::milliseconds(10000));
 			cout << "id="<< (*thr)->get_id() << endl;
 			data_queue.pop();
 			lk.unlock();
@@ -231,13 +302,11 @@ public:
 	void notify()
 	{
 		
-		
-
 		lock_guard<mutex> lk(mut);
 		this_thread::sleep_for(chrono::milliseconds(1000));
 		data_queue.push(1);
 		data_cond.notify_one();
-
+		cout << "notify_one" << endl;
 		
 
 	}
@@ -267,3 +336,4 @@ private:
 	vector<thread *> thr_consumeTasks;
 	timeConsume tt;
 };
+
