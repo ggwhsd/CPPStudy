@@ -228,7 +228,7 @@ new和delete要成对使用，如果表达式中使用了[]，则相应的delete
 
 尽量少做转型。
 
-c++中提供了四种类型转换：`const_cast<T>(expression)`,`dynamic_cast<T>(express)`,`reinterpret_cast<T>(express)`,`static_cast<T>(express)`。常用的const_cast和static_cast。
+c++中提供了四种类型转换：`const_cast<T>(expression)`,`dynamic_cast<T>(express)`,`reinterpret_cast<T>(express)`,`static_cast<T>(express)`。常用的`const_cast`和`static_cast`。
 
 
 ## 《more effective c++》条款23
@@ -239,4 +239,14 @@ c++中提供了四种类型转换：`const_cast<T>(expression)`,`dynamic_cast<T>
 
 比如iostream和stdio库，前者使用方便，类型安全，后者库文件通常较小，通常执行较快。
 
+## 《more effective c++》条款24
 
+使用虚函数、多重继承、虚拟基类和RTTI的成本。
+
+如果我们要使用这些特性，那么必须承受这些成本。其实成本不是很大。但是也要知晓成本的存在及其意义。
+
+主要是使用这些都会创建`vbtls`和`vptrs`。前者为`virtual tables`，后者为`virtual tables pointer`，用于指向哪个`vbtls`。
+
+每个类中都会有一个`vbtls`,类似数组或者链表结构，每一个元素用来记录自己的一个虚函数对应的实现方法。`vptrs`则是每个对象会有的，用于指向具体哪个`vbtls`。
+
+而RTTI则是基于vbtls来实现，相关信息存放在type_info对象中，而该type_info对象放于vbtls中。用于在运行时期得知对象和类的信息。
