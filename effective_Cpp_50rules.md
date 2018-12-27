@@ -231,3 +231,12 @@ new和delete要成对使用，如果表达式中使用了[]，则相应的delete
 c++中提供了四种类型转换：`const_cast<T>(expression)`,`dynamic_cast<T>(express)`,`reinterpret_cast<T>(express)`,`static_cast<T>(express)`。常用的const_cast和static_cast。
 
 
+## 《more effective c++》条款23
+
+考虑使用程序库。理想的程序库：小、快速、威力强大、扩张性好、直观使用、广泛运用、良好支持、使用没有束缚、没有bug。
+
+如果针对大小和速度，往往不具备很好的移植。如果拥有丰富的机能，就不容易直观。没有bug的程序库只能在乌托邦中寻找。真实世界中，不可能拥有每一样东西。
+
+比如iostream和stdio库，前者使用方便，类型安全，后者库文件通常较小，通常执行较快。
+
+
