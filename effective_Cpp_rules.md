@@ -287,4 +287,68 @@ c++中提供了四种类型转换：`const_cast<T>(expression)`,`dynamic_cast<T>
 
 non-member functions,这个，我是觉得应该很少会用到的吧，因为书中举了个操作符虚化的例子，我对重构操作符一直没什么好感。
 
+## 《more effective c++》条款26
 
+解决允许一个类生产特定数量的同类对象：对象计数`Object-counting`
+
+	class Printer{
+	public:
+		class TooManyObjects();
+		Printer();
+		~Printer();
+		...
+	private:
+		static size_t numObjects;
+		Printer(const Printer& rhs);
+	}
+	
+	size_t Printer::numObjects = 0;
+	Printer::Printer()
+	{
+		if(numObjects>=1)
+		{
+			throw TooManyObjects();
+		}
+		++numObjects;
+	}
+	Printer::~Printer()
+	{
+		--numObjects;
+	}
+	
+若是不同类构造状态，以上方法是无法解决的。例如
+
+	class ColorPrinter: public Printer
+	{
+	...
+	}
+	Printer p;
+	ColorPrinter cp;
+	
+	以上会产生两个`Printer`对象。若想只产生一个对象，则`Printer`中需要声明私有构造函数。但是这样子，`Printer`也无法创建对象。怎么办呢？
+	
+	新增一个方法(伪构造函数`pseudo-constructor`），调用私有构造函数。同时为了管理对象资源，使用`auto_ptr`来使用这些资源。
+	
+	class FSA{
+	public:
+		static FSA* makeFSA();  // pseudo-constructor
+		static FSA* makeFSA(const FSA& rhs);
+		...
+	private:
+		FSA();
+		FSA(const FSA& rhs);
+	};
+	
+	FSA* FSA::makeFSA()
+	{ return new FSA(); }
+	
+	FSA* FSA::makeFSA(cosnt FSA& rhs)
+	{ return new FSA(rhs); }
+
+	auto_ptr<FSA> pfsa1(FSA::makeFSA());
+	auto_ptr<FSA> pfsa2(FSA::makeFSA(*pfsa1));
+	
+	以上代码中，及时有类继承，只要派生类中没有调用基类的`makeFSA`方法，则不会产生多余对象。
+	
+	
+	
