@@ -325,9 +325,9 @@ non-member functions,这个，我是觉得应该很少会用到的吧，因为�
 	Printer p;
 	ColorPrinter cp;
 	
-	以上会产生两个`Printer`对象。若想只产生一个对象，则`Printer`中需要声明私有构造函数。但是这样子，`Printer`也无法创建对象。怎么办呢？
+以上会产生两个`Printer`对象。若想只产生一个对象，则`Printer`中需要声明私有构造函数。但是这样子，`Printer`也无法创建对象。怎么办呢？
 	
-	新增一个方法(伪构造函数`pseudo-constructor`），调用私有构造函数。同时为了管理对象资源，使用`auto_ptr`来使用这些资源。
+新增一个方法(伪构造函数`pseudo-constructor`），调用私有构造函数。同时为了管理对象资源，使用`auto_ptr`来使用这些资源。
 	
 	class FSA{
 	public:
@@ -348,7 +348,7 @@ non-member functions,这个，我是觉得应该很少会用到的吧，因为�
 	auto_ptr<FSA> pfsa1(FSA::makeFSA());
 	auto_ptr<FSA> pfsa2(FSA::makeFSA(*pfsa1));
 	
-	以上代码中，及时有类继承，只要派生类中没有调用基类的`makeFSA`方法，则不会产生多余对象。
+以上代码中，及时有类继承，只要派生类中没有调用基类的`makeFSA`方法，则不会产生多余对象。
 	
 	
 	
