@@ -250,3 +250,41 @@ c++中提供了四种类型转换：`const_cast<T>(expression)`,`dynamic_cast<T>
 每个类中都会有一个`vbtls`,类似数组或者链表结构，每一个元素用来记录自己的一个虚函数对应的实现方法。`vptrs`则是每个对象会有的，用于指向具体哪个`vbtls`。
 
 而RTTI则是基于vbtls来实现，相关信息存放在type_info对象中，而该type_info对象放于vbtls中。用于在运行时期得知对象和类的信息。
+
+## 《more effective c++》条款25 
+
+将construct和non-member functions虚化。为什么需要这个呢？我一开始也很疑惑。
+
+`virtual constructor` 原来就是基类虚函数，只是这个虚函数是用于根据不同的输入产生不同的类型对象。然后派生类实现虚函数创建自身对象，基类则可以在使用时根据不同类型创建不同的类对象以便指针或者引用使用，
+
+跟设计模式中的抽象工厂类很像。
+
+如下示例之一,有没有发现什么？虚函数的返回值可以不一样，如果返回值是指针或者引用，指向一个基类，那么派生类的函数可以返回一个指针或者引用，指向基类的一个派生类。
+
+	class Block{
+	public:
+		virtual Block * clone() const = 0;
+	};
+	class TextBlock : public Block 
+	{
+	public:
+		virtual TextBlock * clone() const
+		{
+			return new TextBlock(*this);
+		}
+		...
+	}
+	class ImageBlock : public Block 
+	{
+	public:
+		virtual ImageBlock * clone() const
+		{
+			return new ImageBlock(*this);
+		}
+		...
+	}
+
+
+non-member functions,这个，我是觉得应该很少会用到的吧，因为书中举了个操作符虚化的例子，我对重构操作符一直没什么好感。
+
+
