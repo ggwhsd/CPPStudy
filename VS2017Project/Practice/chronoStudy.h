@@ -229,24 +229,23 @@ long getMicroSeconds()
 	return (tp2.time_since_epoch().count());
 }
 
+
+/// 计算时间消耗
+typedef chrono::time_point<chrono::steady_clock, chrono::milliseconds> milliClock_type;
 void testElapsedmilliTime()
 {
-	
-	microClock_type start, end;
-    start = chrono::time_point_cast<chrono::microseconds>(chrono::system_clock::now());
+	milliClock_type start, end;
+    start = chrono::time_point_cast<chrono::milliseconds>(chrono::steady_clock::now());
 	int i = 0;
-
-	while (i < 100000)
+	while (i < 100000000)
 	{
-
 		i++;
 	}
-	end = chrono::time_point_cast<chrono::microseconds>(chrono::system_clock::now());
-	
+	end = chrono::time_point_cast<chrono::milliseconds>(chrono::steady_clock::now());
+
+
 	std::chrono::milliseconds timeElpased_micro(1);
 	timeElpased_micro = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-
-
-	std::cout
-		<< "elapsed time: " << timeElpased_micro.count() << "s\n";
+	std::cout << "computed counts " << i / 1024 / 1024 << " M elapsed time: " << (end - start).count() << " millis \n";
+	std::cout <<"computed counts "<< i/1024/1024 << " M elapsed time: " << timeElpased_micro.count() << " millis \n";
 }
