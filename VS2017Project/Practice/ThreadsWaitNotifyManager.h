@@ -21,12 +21,12 @@ public:
 		string data("");
 		
 			unique_lock<mutex> lk(mut);
-			cout << getSystemClock_microSeconds() << "before wait" << endl;
+			//cout << getSystemClock_microSeconds() << "before wait" << endl;
 			data_cond.wait(lk, [this] {return !data_queue.empty(); });
-			cout << getSystemClock_microSeconds()<<"after wait" << endl;
+			//cout << getSystemClock_microSeconds()<<"after wait" << endl;
 			if (!data_queue.empty())
 			{
-				cout << getSystemClock_microSeconds() << "get a message :" << (data = data_queue.back()).c_str() << endl;;
+				//cout << getSystemClock_microSeconds() << "get a message :" << (data = data_queue.back()).c_str() << endl;;
 				data_queue.pop();
 			}
 			lk.unlock();
@@ -40,9 +40,9 @@ public:
 		lock_guard<mutex> lk(mut);
 	
 		data_queue.push(message);
-		cout << getSystemClock_microSeconds() << "send a message"<< message.c_str() << endl;
+		//cout << getSystemClock_microSeconds() << "send a message"<< message.c_str() << endl;
 		data_cond.notify_one();
-		cout << getSystemClock_microSeconds() << "notify_one" << endl;
+		//cout << getSystemClock_microSeconds() << "notify_one" << endl;
 
 	
 		
@@ -55,7 +55,10 @@ public:
 		cout << getSystemClock_microSeconds() << "init" << endl;
 
 	}
-
+	int  getDepth()
+	{
+		return data_queue.size();
+	}
 	
 private:
 	mutex mut;
@@ -69,25 +72,35 @@ private:
 
 class commander
 {
-
+	double index_1 = 0.0;
+	double index_2 = 0.0;
 public:
 	void data_preparation_thread()
 	{
-		cout << getSystemClock_microSeconds() << __FUNCTION__ << "begin" << endl;
-		mes->notify("hello");
-		cout << getSystemClock_microSeconds() << __FUNCTION__ << "end" << endl;
-
+		while (index_1<1000000) {
+			index_1 +=1;
+			//cout << getSystemClock_microSeconds() << __FUNCTION__ << "begin,"<< index_1 << endl;
+			mes->notify("hello");
+			//cout << getSystemClock_microSeconds() << __FUNCTION__ << "end" << endl;
+		}
+		cout << mes->getDepth() << endl;
 	}
 
 	void data_processing_thread()
 	{
-		cout << getSystemClock_microSeconds() << __FUNCTION__ << "begin"<<endl;
-		string result = mes->wait();
-		if (result.compare("")!=0)
+		while (true)
 		{
-			cout << getSystemClock_microSeconds() << __FUNCTION__ <<"result "<< result.c_str() << endl;
+			index_2 += 1;
+			//cout << getSystemClock_microSeconds() << __FUNCTION__ << "begin,"<< index_2 << endl;
+			string result = mes->wait();
+			if (result.compare("") != 0)
+			{
+				//cout << getSystemClock_microSeconds() << __FUNCTION__ << "result " << result.c_str() << endl;
+			}
+			if (mes->getDepth() % 10000 == 1)
+				cout << "xxxxxx" << mes->getDepth()<<endl;
+			//cout << getSystemClock_microSeconds() << __FUNCTION__ << "end" << endl;
 		}
-		cout << getSystemClock_microSeconds() << __FUNCTION__ << "end"<<endl;
 	}
 
 	void init()
@@ -120,9 +133,15 @@ void messengerTest()
 
 	thread *t0 = nullptr;
 	thread *t1 = nullptr;
+	thread *t2 = nullptr;
+	
 	t0 = new thread(&commander::data_preparation_thread, com);
-	std::this_thread::sleep_for(std::chrono::milliseconds(300));
+	t2 = new thread(&commander::data_preparation_thread, com);
+	
+	t0->detach();
+	t2->detach();
+
 	t1 = new thread(&commander::data_processing_thread, com);
 	t1->join();
-	t0->detach();
+	cout << "";
 }

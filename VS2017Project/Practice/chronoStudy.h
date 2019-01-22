@@ -228,3 +228,25 @@ long getMicroSeconds()
 	microClock_type tp2 = chrono::time_point_cast<chrono::microseconds>(chrono::system_clock::now());
 	return (tp2.time_since_epoch().count());
 }
+
+void testElapsedmilliTime()
+{
+	
+	microClock_type start, end;
+    start = chrono::time_point_cast<chrono::microseconds>(chrono::system_clock::now());
+	int i = 0;
+
+	while (i < 100000)
+	{
+
+		i++;
+	}
+	end = chrono::time_point_cast<chrono::microseconds>(chrono::system_clock::now());
+	
+	std::chrono::milliseconds timeElpased_micro(1);
+	timeElpased_micro = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+
+
+	std::cout
+		<< "elapsed time: " << timeElpased_micro.count() << "s\n";
+}
