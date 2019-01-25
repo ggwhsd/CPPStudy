@@ -29,7 +29,7 @@
 #include <event2/event.h>
 
 #include "./chronoStudy.h"
-
+#pragma warning(disable: 4996) // avoid strerror to be warned
 static const char MESSAGE[] = "Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!\r\n";
 
 static const int PORT = 9995;
