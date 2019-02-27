@@ -1,0 +1,5 @@
+ctp的dll设计分析：
+* CThostFtdcTraderApi作为交易线程的处理工作，其为抽象类，其中有静态方法CreateFtdcTraderApi，负责创建该抽象类的子类，子类中实现了诸如Init，RegisterSpi，RegisterFront等方法。
+* CustomTradeSpi作为回调类，其中的函数都需要自己继承实现，并将该类注册到上述CThostFtdcTraderApi的子类对象中。
+* CThostFtdcTraderApi的子类对象，会对收发报文进行处理，当收到报文时，进行解析报文，并且调用合适的CustomTradeSpi中的回调函数，将数据传入到业务开发层面的接口中。
+* 为了导出dll，在头文件中ThostFtdcTraderApi.h中声明了两个类，一个是CThostFtdcTraderSpi，没有使用导出语句（_declspec(dllimport)）,另一个是CThostFtdcTraderApi。因为CThostFtdcTraderSpi是作为参数传递给CThostFtdcTraderApi，所以CThostFtdcTraderSpi并没有任何导出语句修饰，而CThostFtdcTraderApi具体实现是在dll中，所以其有导出语句修饰，但是因为是C++的dll导入到C++的项目中，所以这个修饰可有可无（ __declspec(dllimport)）。
