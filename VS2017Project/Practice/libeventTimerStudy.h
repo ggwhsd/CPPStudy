@@ -7,6 +7,11 @@
 
 using namespace std;
 
+struct dataTest
+{
+	int field1;
+	int field2;
+};
 
 void empytCB(evutil_socket_t fd, short what, void *arg)
 {
@@ -29,26 +34,31 @@ public:
 		cout << "dispatch" << endl;
 	}
 public:
-	void addTimer(int seconds, int microseconds, event_callback_fn cb)
+	void addTimer(int seconds, int microseconds, event_callback_fn cb,dataTest* dt)
 	{
 		tv_sec = { seconds, microseconds };
-		event *timeout = event_new(base, -1, EV_PERSIST | EV_TIMEOUT, cb, NULL);
+		event *timeout = event_new(base, -1, EV_PERSIST | EV_TIMEOUT, cb, dt);
 		event_add(timeout, &tv_sec);
 	}
 };
 
-
+//传入数据类型
 void cb(evutil_socket_t fd, short what, void *arg)
 {
-	cout << "event ocurrence every 1  seconds. " << endl;
+	dataTest *dt = (dataTest*)arg;
+	cout << "event ocurrence every 0.5"  << "  seconds.  dataTest:" << dt->field1 + dt->field2 << endl;
 }
 
 //////以下为测试////////
+
+dataTest dt{ 1, 3 };
 void threadWork(Timer* timer)
 {
+	
+	
 	cout << "wait for 3 sencond" << endl;
 	std::this_thread::sleep_for(std::chrono::milliseconds(3000));
-	timer->addTimer(0, 1000000, cb);
+	timer->addTimer(0, 500000, cb,&dt);
 }
 
 void TimerTest()
