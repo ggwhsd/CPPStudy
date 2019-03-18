@@ -46,7 +46,8 @@ public:
 void cb(evutil_socket_t fd, short what, void *arg)
 {
 	dataTest *dt = (dataTest*)arg;
-	cout << "event ocurrence every 0.5"  << "  seconds.  dataTest:" << dt->field1 + dt->field2 << endl;
+	cout << getSystemClock_microSeconds()<<"event ocurrence every 0.5"  << "  seconds.  dataTest:" << dt->field1 + dt->field2 << endl;
+	
 }
 
 //////ÒÔÏÂÎª²âÊÔ////////
@@ -58,7 +59,9 @@ void threadWork(Timer* timer)
 	
 	cout << "wait for 3 sencond" << endl;
 	std::this_thread::sleep_for(std::chrono::milliseconds(3000));
-	timer->addTimer(0, 500000, cb,&dt);
+	cout << getSystemClock_microSeconds() << "add timer:" << endl;
+		timer->addTimer(0, 900000, cb, &dt);
+	dt.field2 = 1000;
 }
 
 void TimerTest()
