@@ -1,0 +1,19 @@
+LIBRARY Dll_feituoguan
+
+EXPORTS
+MAX
+MIN
+ND
+CND
+sgn
+CBND
+BlackScholes
+Merton73
+Black76
+GarmanKolhagen
+GBlackScholes
+GDelta
+GGamma
+GTheta
+GVega
+ImpVol

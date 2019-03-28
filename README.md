@@ -58,3 +58,6 @@ using C++ 11  ,vs2017
 * [libeventTimerStudy.h](./VS2017Project/Practice/libeventTimerStudy.h) 定时器的使用，基于libevent中的定时器进行了封装，使用时候只要创建Timer类的SetTimer做初始化，调用addTimer方法添加定时器以及方法的回调。
 在使用多线程时，一定要有下面这条语句，否则多线程环境里面，定时器的时间是不准的。evthread_use_windows_threads()，我个人台式机上，多线程，定时设置300毫秒，基本误差20毫秒以内，定时设置900毫秒，误差还是20毫秒以内。
 
+# DLL
+
+VS2017DLLSolution 里面是有建立托管和非托管dll的示例。
