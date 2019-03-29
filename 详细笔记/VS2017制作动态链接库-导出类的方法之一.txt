@@ -1,0 +1,100 @@
+这里介绍的导出类和导出函数一样，只是在类前面加上关键字
+
+__declspec(dllexport)
+
+没有其他区别。这种方式，由于整个类导出，所以外部需要对其中的方法内容非常熟悉。而且创建和销毁，类的内部结构和方法都需要，都在外部调用方。
+此外还有一种导出类的方式，就是将类在dll中实例化，然后提供对外的一个工厂函数，用于返回实例化后的对象指针，在头文件中只需要声明一个纯虚类，作为一个接口提供给调用方，而实际类的内部结构是不用公开给调用方。这种方法更好些。
+
+其他项目中引用上述dll，方法也是一样。
+
+整个过程方法如下：
+
+编写Dll
+
+1.建立Dll项目，取名为GUGWAPI。
+2.添加头文件a.h，内容如下
+
+#pragma once
+#ifdef NAIVEAPPROACH_EXPORTS
+#define NAIVEAPPROACH_API __declspec(dllexport)
+#else
+#define NAIVEAPPROACH_API __declspec(dllimport)
+#endif
+//基类也必须导出，否则警告：
+class  NAIVEAPPROACH_API CBase
+{
+public:
+       void Test();
+private:
+       int m_j;
+};
+//也必须导出
+class NAIVEAPPROACH_API CDate
+{
+public:
+       void Test2();
+private:
+       int m_k;
+};
+class NAIVEAPPROACH_API CNaiveApproach : public CBase
+{
+public:
+       CNaiveApproach(int i = 0);
+       // TODO: add your methods here.
+       void Func();
+private:
+       int m_iwuyg;
+       CDate m_dobj;
+};
+
+
+3.修改项目配置：右键项目-》属性-》配置属性-》C/C++-》预处理器-》预处理器定义中，添加NAIVEAPPROACH_EXPORTS
+4.在工程默认生成的GUGWAPI.cpp中，进行实现，代码如下
+
+// GUGWAPI.cpp: 定义 DLL 应用程序的导出函数。
+//
+#include "stdafx.h"
+#include "a.h"
+#include <iostream>
+using namespace std;
+
+CNaiveApproach::CNaiveApproach(int i) : m_iwuyg(i)
+{
+}
+void CNaiveApproach::Func()
+{
+       wcout << L" cswuyg test dll , i = " << m_iwuyg << endl;
+       system("pause");
+}
+void CBase::Test()
+{
+       wcout << L"Just a  Test" << endl;
+       system("pause");
+}
+void CDate::Test2()
+{
+       wcout << L"Test 2" << endl;
+       system("pause");
+}
+
+
+右键项目-》生成，会在debug目录下生成一个lib和一个dll文件。
+使用dll
+1.建立StduyBase项目
+2.将a.h头文件放到该项目的目录下
+3.项目设置-》属性-》配置属性-》VC++目录-》库目录，添加lib和dll所在目录。
+4.编写StudyBase.cpp文件，代码如下
+
+#include "stdafx.h"
+#include <iostream>
+#include "a.h"
+#pragma comment(lib, "../Debug/GUGWAPI.lib")
+int main()
+{
+       CNaiveApproach obj(10);
+       obj.Test();
+       obj.Func();
+    return 0;
+}
+
+

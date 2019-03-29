@@ -1,0 +1,96 @@
+就是将类在dll中实例化，然后提供对外的一个工厂函数，用于返回实例化后的对象指针，在头文件中只需要声明一个纯虚类，作为一个接口提供给调用方，而实际类的内部结构是不用公开给调用方。这种方法更好些。
+
+具体方法如下：
+1.新建dll项目OTHERAPI
+2.新建b.h头文件，代码如下
+
+#pragma once
+#ifdef MATUREAPPROACH_EXPORTS
+#define MATUREAPPROACH_API __declspec(dllexport)
+#else
+#define MATUREAPPROACH_API __declspec(dllimport)
+#endif
+class IExport
+{
+public:
+       virtual void Hi() = 0;
+       virtual void Test() = 0;
+       virtual void Release() = 0;
+};
+extern "C" MATUREAPPROACH_API IExport* _stdcall CreateExportObj();
+extern "C" MATUREAPPROACH_API void _stdcall DestroyExportObj(IExport* pExport);
+3.新建实现类ExportClassImpl.h
+
+#pragma once
+#include "b.h"
+class ExportImpl : public IExport
+{
+public:
+       virtual void Hi();
+       virtual void Test();
+       virtual void Release();
+       ~ExportImpl();
+private:
+};
+4.新建实现类ExportClassImpl.cpp
+
+#include "stdafx.h"
+#include "ExportClassImpl.h"
+#include <iostream>
+using namespace std;
+void ExportImpl::Hi()
+{
+       wcout << L"Hello World" << endl;
+}
+void ExportImpl::Test()
+{
+       wcout << L"Hi cswuyg" << endl;
+}
+void ExportImpl::Release()
+{
+       delete this;
+}
+ExportImpl::~ExportImpl()
+{
+       cout << "Release OK" << endl;
+}
+5.在默认生成的文件OTHERAPI.cpp中，代码如下
+
+// OTHERAPI.cpp: 定义 DLL 应用程序的导出函数。
+//
+#include "stdafx.h"
+#include "./b.h"
+#include "./ExportClassImpl.h"
+MATUREAPPROACH_API IExport* APIENTRY CreateExportObj()
+{
+       return new ExportImpl;
+}
+//这里不能直接delete pExport，因为没有把IExport的析构函数定义为虚函数
+MATUREAPPROACH_API void  APIENTRY DestroyExportObj(IExport* pExport)
+{
+       pExport->Release();
+}
+6.右键项目-》属性-》配置属性-》C/C++-》预处理器-》预处理器定义中，添加NAIVEAPPROACH_EXPORTS。
+7.右键项目-》生成，会在debug目录下生成一个lib和一个dll文件。
+
+使用方法;
+1.建立StduyBase项目
+2.将b.h头文件放到该项目的目录下
+3.项目设置-》属性-》配置属性-》VC++目录-》库目录，添加lib和dll所在目录。
+4.编写StudyBase.cpp文件，代码如下
+
+// StudyBase.cpp: 定义控制台应用程序的入口点。
+//
+#include "stdafx.h"
+#include <iostream>
+#include "./b.h"
+#pragma comment(lib, "../Debug/OTHERAPI.lib")
+int main()
+{
+       IExport* pExport = CreateExportObj();
+       pExport->Hi();
+       pExport->Test();
+       DestroyExportObj(pExport);
+       system("pause");
+    return 0;
+}
