@@ -62,6 +62,7 @@ using C++ 11  ,vs2017
 
 * VS2017DLLSolution 里面是有建立托管和非托管dll的示例。
 
-* [VS2017DLLClassExport](./VS2017DLLClassExport) 是介绍如何导出类的方法，
+* [VS2017DLLClassExport](./VS2017DLLClassExport/) 是介绍如何导出类的方法，
 分为两种,第一种直接导出实现类，头文件包含类中所有的方法声明。
 第二种导出虚类接口，头文件只包含接口不包含实现类的声明。
+2019-4-16 新增，线程通信类的自定义开发的库。
