@@ -161,6 +161,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="chronoStudy.h" />
+    <ClInclude Include="CircleVector.h" />
     <ClInclude Include="ComputerInformation.h" />
     <ClInclude Include="coutStudy.h" />
     <ClInclude Include="Cpp11_Function_Study.h" />
@@ -187,6 +188,7 @@
     <ClInclude Include="xmlStudy.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CircleVector.cpp" />
     <ClCompile Include="libxml\tinyxml2.cpp" />
     <ClCompile Include="Practice.cpp" />
     <ClCompile Include="stdafx.cpp">
