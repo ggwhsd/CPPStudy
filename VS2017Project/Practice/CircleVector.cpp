@@ -63,3 +63,28 @@ void CicleVector::display()
 	}
 	cout << endl;
 }
+
+void CicleVector::display2()
+{
+	int i = front;
+	cout << "数组内容为" << endl;
+	if (front < rear)
+	{
+		while (i < rear)
+		{
+			cout << vInt[i] << " ";
+			i++;
+		}
+	}
+	else
+	{
+		while ((i%maxSize)!=rear)
+		{
+			cout << vInt[(i%maxSize)] << " ";
+			i++;
+		}
+	}
+	cout << endl;
+
+
+}

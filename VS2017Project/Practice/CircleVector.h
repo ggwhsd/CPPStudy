@@ -25,6 +25,7 @@ public:
 	bool isFull();
 	bool isEmpty();
 	void display();
+	void display2();
 
 
 
