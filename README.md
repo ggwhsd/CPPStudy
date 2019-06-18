@@ -71,4 +71,6 @@ using C++ 11  ,vs2017
 
 * [指针和类之间的关系](./VS2017Project/Practice/pointerToMember.h)
 
+* [Math基础](./VS2017Project/Practice/mathTest.h)
 
+* [numeric_limits最大值最小值](./VS2017Project/Practice/mathTest.h)

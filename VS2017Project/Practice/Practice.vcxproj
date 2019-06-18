@@ -173,6 +173,7 @@
     <ClInclude Include="libevent_EvbufferStudy.h" />
     <ClInclude Include="libxml\tinyxml2.h" />
     <ClInclude Include="logger.h" />
+    <ClInclude Include="mathTest.h" />
     <ClInclude Include="NetBigEndStudy.h" />
     <ClInclude Include="NLOHMANN_JSON.h" />
     <ClInclude Include="pointerToMember.h" />
@@ -185,6 +186,7 @@
     <ClInclude Include="ThreadPoolsStudy.h" />
     <ClInclude Include="ThreadsWaitNotifyManager.h" />
     <ClInclude Include="Thread_condition_variable.h" />
+    <ClInclude Include="va_listStudy.h" />
     <ClInclude Include="WindowsFileApi.h" />
     <ClInclude Include="xmlStudy.h" />
   </ItemGroup>
