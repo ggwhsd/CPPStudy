@@ -51,7 +51,9 @@ using C++ 11  ,vs2017
 
 * [xmlStudy.h](./VS2017Project/Practice/xmlStudy.h) 如何使用`tinyxml2`库进行xml文件的读写使用。
 
-* [Cpp11_Function_Study.h](./VS2017Project/Practice/Cpp11_Function_Study.h) 介绍了C++11中引入的Function，相当于是以前C语言中的函数指针，但是可以封装很好，可以分装各种函数。也介绍了右值引用&&，这个也是C++11中新引入的机制，对于提升内存使用效率很有用。
+* [Cpp11_Function_Study.h](./VS2017Project/Practice/Cpp11_Function_Study.h) 介绍了C++11中引入的Function，相当于是以前C语言中的函数指针，但是可以封装很好，可以分装各种函数。
+也介绍了右值引用&&，这个也是C++11中新引入的机制，对于提升内存使用效率很有用。
+新增了bind的使用方式，这样就可以使用同一个function，来对应参数相同，返回值相同的不同普通函数，不同类对象，以及不同类成员函数，从而可以实现多种映射方式。简直很棒。
 
 * [ThreadsWaitNotifyManager.h](./VS2017Project/Practice/ThreadsWaitNotifyManager.h) 用于多线程之间通信的一个类。
 

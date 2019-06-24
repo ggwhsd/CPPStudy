@@ -37,7 +37,55 @@ void FunctionTest()
 
 
 }
+typedef function<int(int)> fun1;
+int printOne(int a)
+{
+	return a;
+}
+class class1 
+{
+public:
+	int operator()(int i)
+	{
+		return i*i;
+	}
+};
+class A
+{
+public:
+	int printOne(int i)
+	{
+		return i * i*i;
+	}
+};
+void FunctionTest2()
+{
+	cout << "fun create" << endl;
+	vector<fun1> pFun;
+	fun1 fun;
+	fun = printOne;
+	pFun.push_back(fun);
+	cout << "assign  int printOne(int) to function" << endl;
+	cout<<fun(1)<<endl;
+	fun = class1();
+	cout << "assign Class::operator() to function" << endl;
+	pFun.push_back(fun);
+	cout<<fun(2)<<endl;
+	A a;
+	fun = bind(&A::printOne, a,placeholders::_1);
+	cout << "assign class int A::printOne(int) to function" << endl;
+	cout << fun(2) << endl;
+	pFun.push_back(fun);
 
+	auto funEle = pFun.begin();
+	cout << "itrator fun" << endl;
+	while (funEle != pFun.end())
+	{
+		cout << (*funEle)(2) << endl;
+		funEle++;
+	}
+
+}
 
 
 void ProcessValue(int& i) { std::cout << "LValue processed: " << i << std::endl; } 
