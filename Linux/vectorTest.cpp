@@ -35,7 +35,7 @@ void testVectorTime2(int number)
 	clock_t end = clock();
 	cout << "生成tenElement "<< number <<"个对象 耗时" <<(double)(end - start)/CLOCKS_PER_SEC << "SECOND" << endl;
 	start = clock();
-	for (size_t i = number; i > 0; i--)
+	for (int i = number-1; i > 0; i--)
 	{
 		if (tenElement[i].a == 2)
 		{
