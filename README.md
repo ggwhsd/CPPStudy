@@ -80,4 +80,9 @@ using C++ 11  ,vs2017
 * [va_args多参数使用](./VS2017Project/Practice/va_listStudy.h)
 
 * [shared_ptr和auto_ptr](./VS2017Project/Practice/shardPtrStudy.h)
-* [future,promise,async,packaged_task C++11的异步线程]
+
+* [future,async异步线程](./VS2017Project/Practice/asyncFutureStudy.h)
+
+* [future,promise](./VS2017Project/Practice/future_promise_test.h)
+
+* [future,promise,packaged_task](./VS2017Project/Practice/packagedTaskStudy.h)

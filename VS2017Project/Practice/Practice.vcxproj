@@ -160,12 +160,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="asyncFutureStudy.h" />
     <ClInclude Include="chronoStudy.h" />
     <ClInclude Include="CircleVector.h" />
     <ClInclude Include="ComputerInformation.h" />
     <ClInclude Include="coutStudy.h" />
     <ClInclude Include="Cpp11_Function_Study.h" />
     <ClInclude Include="exceptionStudy.h" />
+    <ClInclude Include="future_promise_test.h" />
     <ClInclude Include="JSONStudy.h" />
     <ClInclude Include="libeventHello.h" />
     <ClInclude Include="libEventProxy.h" />
@@ -176,6 +178,7 @@
     <ClInclude Include="mathTest.h" />
     <ClInclude Include="NetBigEndStudy.h" />
     <ClInclude Include="NLOHMANN_JSON.h" />
+    <ClInclude Include="packagedTaskStudy.h" />
     <ClInclude Include="pointerToMember.h" />
     <ClInclude Include="shardPtrStudy.h" />
     <ClInclude Include="stdafx.h" />
