@@ -65,5 +65,21 @@ public:
 
 	}
 
+	static void testDBL_MIN()
+	{
+		double value = -0.05;
+		printf("%.3le\n", value);
+		printf("%.3le\n", DBL_MIN);
+		if (DBL_MIN > value)
+		{
+			
+			cout << "-0.05 小于 DBL_MIN" << endl;
+		}
+		else
+		{
+			cout << "-0.05 大于等于 DBL_MIN" << endl;
+		}
+	}
+
 	
 };
