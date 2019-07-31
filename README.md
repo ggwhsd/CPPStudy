@@ -86,3 +86,5 @@ using C++ 11  ,vs2017
 * [future,promise](./VS2017Project/Practice/future_promise_test.h)
 
 * [future,promise,packaged_task](./VS2017Project/Practice/packagedTaskStudy.h)
+
+* [谷歌的glog日志库的使用](./VS2017Project/Practice/glogStudy.h)

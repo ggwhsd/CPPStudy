@@ -4,6 +4,14 @@ using namespace std;
 class IStrategy {
 public:
 	virtual void Travel() = 0;
+	IStrategy()
+	{
+		cout << __FUNCTION__ << endl;
+	}
+	virtual ~IStrategy()
+	{
+		cout << __FUNCTION__ << endl;
+	}
 };
 
 class BikeStrategy : public IStrategy {
@@ -12,6 +20,14 @@ public:
 		cout << "travel by bike" << endl;
 	}
 
+	BikeStrategy()
+	{
+		cout << __FUNCTION__ << endl;
+	}
+	~BikeStrategy()
+	{
+		cout << __FUNCTION__ << endl;
+	}
 
 };
 

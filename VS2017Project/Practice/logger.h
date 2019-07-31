@@ -10,13 +10,14 @@
 using namespace std;
 /*
 	自定义日志类
-	WriteLog_ThreadSafe多线程安全方法
+	WriteLog_ThreadSafe多线程安全方法,
 	其余均为非多线程安全方法
 	
 	其实在我自己的项目中，时间方法是用到另外一个自己开发的简约库，但是为了使得库可以独自使用，所以下面没有使用自己开发的库，而是重新提供了时间方法。
 
 	由于使用的是流stream，而流本身已经是缓存，所以写入操作理论上是异步方式的，即写入到流缓存，然后程序立即往下执行，而流根据缓存是否满再写入到文件中。
 
+	2019-7-31 FATAL 发现多线程处理的不好，写入的时候，流还是可能会做其他写入操作
 */
 
 enum LOGLEVEL { LOG_DEBUG, LOG_INFO, LOG_WARNING, LOG_ERROR, LOG_FATAL };
