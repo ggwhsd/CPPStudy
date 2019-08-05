@@ -88,3 +88,5 @@ using C++ 11  ,vs2017
 * [future,promise,packaged_task](./VS2017Project/Practice/packagedTaskStudy.h)
 
 * [谷歌的glog日志库的使用](./VS2017Project/Practice/glogStudy.h)
+
+* glog日志工程，基于32和64的vs2017工程解决方案[工程](./glog-master)
