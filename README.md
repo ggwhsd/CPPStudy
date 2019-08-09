@@ -90,3 +90,5 @@ using C++ 11  ,vs2017
 * [谷歌的glog日志库的使用](./VS2017Project/Practice/glogStudy.h)
 
 * glog日志工程，基于32和64的vs2017工程解决方案[工程](./glog-master)
+
+* [ThreadsWaitNotifyManager.h](./VS2017Project/Practice/ThreadsWaitNotifyManager.h)使用了union结构，模拟实现了事件加入到事件队列以及被消费的过程，使用的是一个队列。union最好使用基本的struct结构，不要涉及到指针等类。
