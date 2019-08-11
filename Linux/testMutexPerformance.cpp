@@ -10,22 +10,29 @@ using namespace std;
 std::mutex mt;
 clock_t start=0;
 clock_t endt=0;
-struct my
-{
-	int i;
-	int j;
-	clock_t timestamp;
-	clock_t lastDealtime;
 
-};
-my* m1;
 bool isOver=true;
 int countLimit = 100000;
 
 inline void timeConsumeWork(int &i)
 {
-i++;
-
+    i++;
+	i--;
+	i++;
+	i--;
+	i++;	
+	i--;
+	i++;
+	i--;
+	i++;
+	i--;
+	i++;
+	i--;
+	i++;	
+	i--;
+	i++;
+	i--;
+	i++;
 }
 void thread_s2()
 {
@@ -59,9 +66,12 @@ void thread_s()
 
   while(i<countLimit)
   {
-  	mt.lock();
+  	{
+  		mt.lock();
+  	//lock_guard<mutex> lk(mt);
 	timeConsumeWork(i);
 	mt.unlock();
+}
   }
   endt = clock();
 
@@ -79,13 +89,14 @@ void thread_s()
  
 int main() {
 
-  
   thread threadS(thread_s);
   threadS.join();
-  this_thread::sleep_for(chrono::milliseconds(1000));
+
+  
+
   thread threadS2(thread_s2);
   threadS2.join();
-
+ // this_thread::sleep_for(chrono::milliseconds(1000));
 
   std::cout<<"one seconds = "<<CLOCKS_PER_SEC<<std::endl;
   return 0;
