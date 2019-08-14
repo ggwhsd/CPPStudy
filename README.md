@@ -93,4 +93,6 @@ using C++ 11  ,vs2017
 
 * [ThreadsWaitNotifyManager.h](./VS2017Project/Practice/ThreadsWaitNotifyManager.h)使用了union结构，模拟实现了事件加入到事件队列以及被消费的过程，使用的是一个队列。union最好使用基本的struct结构，不要涉及到指针等类。
 
-* STL的一些杂笔记(./VS2017STL/STLTest.cpp)
+* STL的一些杂笔记【示例】(./VS2017STL/STLTest.cpp)
+
+* 事件驱动的线程安全的消息分发中心示例EventsCenter[示例](./VS2017Project/Practice/ThreadsWaitNotifyManager.h)，也可以参考另外一个项目EventsCenter，专门将该功能分离出来了。
