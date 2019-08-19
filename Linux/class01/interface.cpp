@@ -28,15 +28,28 @@ protected:
 // 派生类
 class Rectangle: public Shape
 {
+private:
+   int factor;
 public:
+   Rectangle()
+   {
+      factor = 2;      
+   }
    int getArea()
-   { 
-      return (width * height); 
+   {
+
+      return (width * height*factor); 
    }
 };
 class Triangle: public Shape
 {
+   private :
+   int factor;
 public:
+   Triangle()
+   {
+      factor = 100;      
+   }
    int getArea()
    { 
       return (width * height)/2; 
@@ -58,5 +71,13 @@ int main(void)
    Tri.setHeight(7);
    // 输出对象的面积
    cout << "Total Triangle area: " << Tri.getArea() << endl; 
+
+
+   Shape *shape = new Rectangle();
+   shape->setWidth(5);
+   shape->setHeight(7);
+   // 输出对象的面积
+   cout << "Total Rectangle area: " << shape->getArea() << endl;
+ 
    return 0;
 }
