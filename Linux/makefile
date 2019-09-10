@@ -1,11 +1,11 @@
-OBJS=vectorTest.o
-XX = g++
-CFLAGS =  -g
-TARGET = vectorTest
+dirs = 01factorial
 
-vectorTest: ${OBJS}
-	$(XX) $(CFLAGS) -o $(TARGET) ${OBJS}
-
+all:
+	@for dir in $(dirs); do \
+		make -C $$dir all -f makefile; \
+	done
 clean:
-	rm ${OBJS}
-
+	@for dir in $(dirs); do \
+		make -C $$dir clean -f makefile; \
+	done
+.PHONY: all clean
