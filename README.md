@@ -96,3 +96,5 @@ using C++ 11  ,vs2017
 * STL的一些杂笔记[示例](./VS2017STL/STLTest.cpp)
 
 * 事件驱动的线程安全的消息分发中心示例EventsCenter[示例](./VS2017Project/Practice/ThreadsWaitNotifyManager.h)，也可以参考另外一个项目EventsCenter，专门将该功能分离出来了。
+
+* string和int、double等类型之间的转换[示例](./VS2017Project/Practice/)
