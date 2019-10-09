@@ -143,6 +143,22 @@ namespace JSONSTUDY {
 		o << std::setw(4) << j << std::endl;
 	}
 
+	void iteratorRead()
+	{
+		json j2 = {
+			{ "pi", 3.141 },
+		{ "happy" , true },
+		{ "name" , "Niels" },
+		{ "nothing","nothing" },
+		{ "list" ,{ 1, 0, 2 } }
+		};
+		
+
+		for (json::iterator it = j2.begin(); it != j2.end(); ++it) {
+			std::cout << it.key() << " : " << it.value() << "\n";
+		}
+	}
+
 
 
 }
