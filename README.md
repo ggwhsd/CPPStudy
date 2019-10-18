@@ -34,7 +34,7 @@ using C++ 11  ,vs2017
    client.SocketStart();
 ```
 
-* [STLMap.h](./VS2017Project/Practice/STLMap.h) 使用map容器
+* [STLMap.h](./VS2017Project/Practice/STLMap.h) 使用map、undered_map，以及priority_queue。
 
 * [STLVector.h](./VS2017Project/Practice/STLVector.h) 使用`vector`，以及内存地址变化。
 
@@ -100,3 +100,5 @@ using C++ 11  ,vs2017
 * string和int、double等类型之间的转换[示例](./VS2017Project/Practice/stringStudy.h)
 
 * const的各种用法[示例](./VS2017Project/Practive/constStudy.h)
+
+* priority_queue的使用示例 [示例](./VS2017Project/Practice/STLMap.h)
