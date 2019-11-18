@@ -118,8 +118,8 @@ namespace JSONSTUDY {
 	{
 		json j = "this is a string";
 		// explicit conversion to string
-		std::string s = j.dump();    // {\"happy\":true,\"pi\":3.141}
-		std::cout << j.dump(4) << std::endl;
+		std::string s = j.dump();  
+		std::cout << j.dump(2) << std::endl;
 
 		std::string cpp_string2;
 		j.get_to(cpp_string2);
@@ -157,6 +157,122 @@ namespace JSONSTUDY {
 		for (json::iterator it = j2.begin(); it != j2.end(); ++it) {
 			std::cout << it.key() << " : " << it.value() << "\n";
 		}
+	}
+
+
+	//自定义结构，需要重载如下函数方法进行序列化和反序列化
+
+	namespace nlohmann {
+		struct Person {
+			string name;
+			int age;
+		};
+
+		struct Persons
+		{
+			vector<Person> persons;
+		};
+
+		 void to_json(json& j, const Person& p) {
+				j = json{ {"name",p.name},{"age",p.age} };   //设置 结构中的字段与json中的key对照关系，name和age可以随意改成我们想映射的名字，最终显示到json字符串里面。
+			}
+
+		 void from_json(const json& j, Person& p) {
+				p.name = j.at("name").get<string>();
+				p.age = j.at("age").get<int>();
+			}
+		 void to_json(json& j, const Persons& ps) {
+			 j = json{ { "persons", ps.persons } };
+		 }
+		 void from_json(const json& j, Persons& ps) {
+			 ps.persons = j.at("persons").get<vector<Person>>();
+		 }
+
+	}
+	int  TestObjectToSerial()
+	{
+		string jsonString = R"(
+    {
+      "name" : "Joe",
+      "age" : 12
+    }
+)";
+		using namespace nlohmann;
+		json j = json::parse(jsonString);
+		Person p = j;
+		
+		cout << "name: " << p.name << endl
+			<< "age: " << p.age << endl;
+		j = p;
+		cout << j << endl;
+		cout << j.dump(3) << endl;
+
+		return 0;
+	}
+
+	int TestObjectToSerial2()
+	{
+		string jsonString = R"({
+  "persons" : [
+    {
+      "name" : "Joe",
+      "age" : 12
+    },
+{
+      "name" : "Joe2",
+      "age" : 122
+    }
+  ]
+})";
+		using namespace nlohmann;
+		json j = json::parse(jsonString);
+		Persons ps = j;
+		auto &p = ps.persons[0];
+		cout << "name: " << p.name << endl
+			<< "age: " << p.age << endl;
+		auto &p2 = ps.persons[1];
+		cout << "name: " << p2.name << endl
+			<< "age: " << p2.age << endl;
+		j = ps;
+		cout << j << endl;
+		cout << j.dump(2) << endl;
+
+		return 0;
+
+	}
+
+
+	struct Person2 {
+		string name;
+		int age;
+	};
+	void to_json(json& j, const Person2& p) {
+		j = json{ { "name",p.name },{ "age",p.age } };   //设置 结构中的字段与json中的key对照关系，name和age可以随意改成我们想映射的名字，最终显示到json字符串里面。
+	}
+
+	void from_json(const json& j, Person2& p) {
+		p.name = j.at("name").get<string>();
+		p.age = j.at("age").get<int>();
+	}
+	int  TestObjectToSeria3()
+	{
+		string jsonString = R"(
+    {
+      "name" : "Joe",
+      "age" : 12
+    }
+)";
+		//using namespace nlohmann;
+		json j = json::parse(jsonString);
+		Person2 p = j;
+
+		cout << "name: " << p.name << endl
+			<< "age: " << p.age << endl;
+		j = p;
+		cout << j << endl;
+		cout << j.dump(3) << endl;
+
+		return 0;
 	}
 
 

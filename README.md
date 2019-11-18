@@ -16,7 +16,7 @@ using C++ 11  ,vs2017
 
 * [NLOHMANN_JSON.h](./VS2017Project/Practice/NLOHMANN_JSON.h) is a famous json lib whose author is NLOHMANN. 
 
-* [JSONStudy.h](./VS2017Project/Practice/JSONStudy.h) show how to use json based on NLOHMANN_JSON.h.
+* [JSONStudy.h](./VS2017Project/Practice/JSONStudy.h) show how to use json based on NLOHMANN_JSON.h.  And how to use NLOHMANN_JSON to serial the object to json.
 
 * [effective c++](./effective_Cpp_rules.md) 是当做《effective c++》读书笔记，结合工作中会用到的，做了记录，不会用到的，可能只是记个规则。同时里面也补充了《more effective c++》中的一些规则。
 
@@ -102,3 +102,4 @@ using C++ 11  ,vs2017
 * const的各种用法[示例](./VS2017Project/Practive/constStudy.h)
 
 * priority_queue的使用示例 [示例](./VS2017Project/Practice/STLMap.h)
+
