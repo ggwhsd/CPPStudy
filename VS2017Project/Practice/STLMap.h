@@ -23,6 +23,13 @@ public:
 		messages.insert(pair<int, string>(++NO, "Tom2"));
 		messages.insert(pair<int, string>(++NO, "Tom3"));
 	}
+	void insert2()
+	{
+		cout << "插入三条记录" << endl;
+		messages.insert(pair<int, string>(++NO, "Tom1"));
+		messages.insert(pair<int, string>(NO, "Tom2"));
+		messages.insert(pair<int, string>(NO, "Tom3"));
+	}
 	void display()
 	{
 		cout << "显示所有记录" << endl;
@@ -45,6 +52,13 @@ public:
 		insert();
 		display();
 		clear();
+	}
+	void SameInsertTest()
+	{
+		insert2();
+		display();
+		clear();
+
 	}
 	
 };

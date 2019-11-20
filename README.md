@@ -103,3 +103,5 @@ using C++ 11  ,vs2017
 
 * priority_queue的使用示例 [示例](./VS2017Project/Practice/STLMap.h)
 
+* 虚函数\虚基类\纯虚函数（抽象类）的使用示例 [示例](./VS2017Project/Practice/virutalFunStudy.h)
+

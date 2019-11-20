@@ -193,6 +193,7 @@
     <ClInclude Include="ThreadsWaitNotifyManager.h" />
     <ClInclude Include="Thread_condition_variable.h" />
     <ClInclude Include="va_listStudy.h" />
+    <ClInclude Include="virutalFunStudy.h" />
     <ClInclude Include="WindowsFileApi.h" />
     <ClInclude Include="xmlStudy.h" />
   </ItemGroup>
