@@ -184,6 +184,7 @@
     <ClInclude Include="pointerToMember.h" />
     <ClInclude Include="shardPtrStudy.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="STLAlgorithm.h" />
     <ClInclude Include="STLMap.h" />
     <ClInclude Include="STLVector.h" />
     <ClInclude Include="streamStudy.h" />

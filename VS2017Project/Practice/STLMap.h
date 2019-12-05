@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include <string>
 #include <iostream>
+#include <functional>
 
 using namespace std;
 
@@ -26,6 +27,7 @@ public:
 	void insert2()
 	{
 		cout << "插入三条记录" << endl;
+		/*不允许重复，若重复会直接覆盖*/
 		messages.insert(pair<int, string>(++NO, "Tom1"));
 		messages.insert(pair<int, string>(NO, "Tom2"));
 		messages.insert(pair<int, string>(NO, "Tom3"));
@@ -300,4 +302,32 @@ public:
 	}
 
 
+};
+
+void pairCoutF(pair<string, string> p)
+{
+	cout << __FUNCTION__ << " "<< p.first << " " << p.second << endl;
+}
+struct pairCout
+{
+	void operator()(pair<string, string> p)
+	{
+		cout << __FUNCTION__ << " " << p.first << " " << p.second << endl;
+	}
+};
+class STLPairStudy
+{
+public:
+
+public:
+	void testPair()
+	{
+		pair<string, string> pair1{ "key1","1" };
+		vector<pair<string, string>> vecPair;
+		vecPair.push_back(pair1);
+		vecPair.push_back(make_pair("key2", "2"));
+		for_each(vecPair.begin(), vecPair.end(), pairCoutF);
+		for_each(vecPair.begin(), vecPair.end(), pairCout()); //推荐这种方式
+	
+	}
 };

@@ -38,4 +38,17 @@ namespace gugw {
 		return arrays;
 	}
 	
+	class StringStudy
+	{
+		string str;
+	public:
+		void testSwap()
+		{
+			str = "bbbbbbb";
+			string str2 = "aaaaa";
+			std::cout << "now str=" << str << " str2=" << str2 << std::endl;
+			str.swap(str2);
+			std::cout << "now str=" << str << " str2=" << str2 << std::endl;
+		}
+	};
 }
