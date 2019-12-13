@@ -142,7 +142,7 @@ void testElapsedtime()
 }
 
 
-void testSystemClock_microSeconds()
+void testSystemClock_microSeconds(int elapse)
 {
 	using std::chrono::system_clock;
 
@@ -154,7 +154,7 @@ void testSystemClock_microSeconds()
 	system_clock::time_point timenow = system_clock::now();
 	system_clock::time_point timenext = timenow + one_mircoSecond;
 	//count的单位是秒
-	cout << "one_mircoSecond" << std::chrono::duration_cast< std::chrono::duration<float>>(timenext - timenow).count() << endl;
+	cout << this_thread::get_id()<<" one_mircoSecond" << std::chrono::duration_cast< std::chrono::duration<float>>(timenext - timenow).count() << endl;
 
 
 	//设置time_point的时钟和count最小周期为微秒，目前使用的windows机器count默认是0.1微秒。
@@ -163,7 +163,7 @@ void testSystemClock_microSeconds()
 	//将system_clock的time_point结构转换为微秒计算
 	microClock_type tp = chrono::time_point_cast<chrono::microseconds>(chrono::system_clock::now());
 	int i = 0;
-	while (i < 100000)
+	while (i < elapse)
 	{
 
 		i++;
@@ -175,12 +175,12 @@ void testSystemClock_microSeconds()
 	localtime_s(&ltm, &tt);
 	strftime(timebuf, 30, "%F %R:%S", &ltm);
 	//count的单位是微秒，显示为秒需要乘以10的-6次方
-	cout << timebuf << ":" << setfill('0') << setw(6)<<tp.time_since_epoch().count() % (1000000) << "micros\n";
+	cout << this_thread::get_id() <<" "<< timebuf << ":" << setfill('0') << setw(6)<<tp.time_since_epoch().count() % (1000000) << "micros\n";
 	//转换为ctime.用于打印显示时间   
 	tt = chrono::system_clock::to_time_t(tp2);
 	localtime_s(&ltm, &tt);
 	strftime(timebuf, 30, "%F %R:%S", &ltm);
-	cout << " " << timebuf << ":" <<  setfill('0') << setw(6) <<tp2.time_since_epoch().count() % (1000000) << "micros\n";
+	cout << this_thread::get_id() <<" " << timebuf << ":" <<  setfill('0') << setw(6) <<tp2.time_since_epoch().count() % (1000000) << "micros\n";
 	
 	
 	
@@ -191,10 +191,10 @@ void testSystemClock_microSeconds()
 	string str(timebuf);
 	
 	str.append(mircostr);
-	cout << "str=" << str.c_str() << endl;
+	cout << this_thread::get_id() << " "<<"str=" << str.c_str() << endl;
 
 	strcat_s(timebuf, mircostr);
-	cout << "timebuf=" << timebuf << endl;
+	cout << this_thread::get_id() << " "<<"timebuf=" << timebuf << endl;
 
 }
 typedef chrono::time_point<chrono::system_clock, chrono::microseconds> microClock_type;
@@ -248,4 +248,12 @@ void testElapsedmilliTime()
 	timeElpased_micro = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
 	std::cout << "computed counts " << i / 1024 / 1024 << " M elapsed time: " << (end - start).count() << " millis \n";
 	std::cout <<"computed counts "<< i/1024/1024 << " M elapsed time: " << timeElpased_micro.count() << " millis \n";
+}
+
+
+void testThread_SystemClock_microSeconds(int elapse)
+{
+	thread t(testSystemClock_microSeconds, elapse);
+	t.detach();
+	
 }

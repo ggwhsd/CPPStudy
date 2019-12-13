@@ -113,3 +113,11 @@ using C++ 11  ,vs2017
 
 * STL的copy 算法 [示例CopyStudy] (./VS2017Project/Practive/STLAlgorithm.h)
 
+# API的设计
+
+* Pimpl的使用，这个在effective C++中应该也提到。[实例autoTimer.h](./VS2017DesignAPI/DesignAPI/autoTimer.h)
+
+* 发布和订阅的完整[示例](./VS2017DesignAPI/DesignAPI/observer.h)
+
+* 模板的使用，显式和隐式定义。 [示例](./VS2017DesignAPI/DesignAPI/stack.h)
+
