@@ -60,14 +60,6 @@ using C++ 11  ,vs2017
 * [libeventTimerStudy.h](./VS2017Project/Practice/libeventTimerStudy.h) 定时器的使用，基于libevent中的定时器进行了封装，使用时候只要创建Timer类的SetTimer做初始化，调用addTimer方法添加定时器以及方法的回调。
 在使用多线程时，一定要有下面这条语句，否则多线程环境里面，定时器的时间是不准的。evthread_use_windows_threads()，我个人台式机上，多线程，定时设置300毫秒，基本误差20毫秒以内，定时设置900毫秒，误差还是20毫秒以内。
 
-# DLL
-
-* VS2017DLLSolution 里面是有建立托管和非托管dll的示例。
-
-* [VS2017DLLClassExport](./VS2017DLLClassExport/) 是介绍如何导出类的方法，
-分为两种,第一种直接导出实现类，头文件包含类中所有的方法声明。
-第二种导出虚类接口，头文件只包含接口不包含实现类的声明。
-2019-4-16 新增，线程通信类的自定义开发的库。
 
 * [循环队列的实现](./VS2017Project/Practice/CircleVector.h)
 
@@ -113,6 +105,19 @@ using C++ 11  ,vs2017
 
 * STL的copy 算法 [示例CopyStudy] (./VS2017Project/Practive/STLAlgorithm.h)
 
+* 运算符重载 [示例](./VS2017Project/Practive/operatorStudy.h)
+
+
+# DLL
+
+* VS2017DLLSolution 里面是有建立托管和非托管dll的示例。
+
+* [VS2017DLLClassExport](./VS2017DLLClassExport/) 是介绍如何导出类的方法，
+分为两种,第一种直接导出实现类，头文件包含类中所有的方法声明。
+第二种导出虚类接口，头文件只包含接口不包含实现类的声明。
+2019-4-16 新增，线程通信类的自定义开发的库。
+
+
 # API的设计
 
 * Pimpl的使用，这个在effective C++中应该也提到。[实例autoTimer.h](./VS2017DesignAPI/DesignAPI/autoTimer.h)
@@ -120,4 +125,5 @@ using C++ 11  ,vs2017
 * 发布和订阅的完整[示例](./VS2017DesignAPI/DesignAPI/observer.h)
 
 * 模板的使用，显式和隐式定义。 [示例](./VS2017DesignAPI/DesignAPI/stack.h)
+
 

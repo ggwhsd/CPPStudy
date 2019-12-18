@@ -54,9 +54,9 @@ namespace streamStudy {
 
 	public:
 
-		const MyOutstream& operator << (int value)const;//对整型变量的重载
+		const MyOutstream& operator << (int value)const;//对整型变量的重载运算符
 
-		const MyOutstream& operator << (const char*str)const;//对字符串型的重载
+		const MyOutstream& operator << (const char*str)const;//对字符串型的重载运算符
 
 	
 
