@@ -7,6 +7,9 @@ TARGET = reciprocal
 SOURCES = $(wildcard *.c *.cpp)
 OBJS = $(patsubst %.c,%.o,$(patsubst %.cpp,%.o,$(SOURCES)))
 
+all:$(TARGET)
+
+
 %.o:%.c
 	$(G) $(CFLAGS) -c $<
 
