@@ -5,6 +5,7 @@
 using namespace std;
 
 //功能和c中的函数指针很像一样，但是更安全，封装的更好
+//doubleReferenceTest中解释了右值引用。
 std::function<double(string)> ff;
 
 double test1(string str)

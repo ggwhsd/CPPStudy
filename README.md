@@ -91,21 +91,23 @@ using C++ 11  ,vs2017
 
 * string和int、double等类型之间的转换[示例](./VS2017Project/Practice/stringStudy.h)
 
-* const的各种用法[示例](./VS2017Project/Practive/constStudy.h)
+* const的各种用法[示例](./VS2017Project/Practice/constStudy.h)
 
 * priority_queue的使用示例 [示例](./VS2017Project/Practice/STLMap.h)
 
 * 虚函数\虚基类\纯虚函数（抽象类）的使用示例 [示例](./VS2017Project/Practice/virutalFunStudy.h)
 
-* STL的 pair和for_each的自定义处理函数的使用 [示例 STLPairStudy](./VS2017Project/Practive/STLMap.h)
+* STL的 pair和for_each的自定义处理函数的使用 [示例 STLPairStudy](./VS2017Project/Practice/STLMap.h)
 
-* STL的sort和stable_sort,nth_element算法，自定义类和自定义比较方法 [示例SortStudy] (./VS2017Project/Practive/STLAlgorithm.h)
+* STL的sort和stable_sort,nth_element算法，自定义类和自定义比较方法 [示例SortStudy] (./VS2017Project/Practice/STLAlgorithm.h)
 
-* STL的find_if,search,binary_search,equal_range,lower_bound 算法 [示例FindStudy] (./VS2017Project/Practive/STLAlgorithm.h)
+* STL的find_if,search,binary_search,equal_range,lower_bound 算法 [示例FindStudy] (./VS2017Project/Practice/STLAlgorithm.h)
 
-* STL的copy 算法 [示例CopyStudy] (./VS2017Project/Practive/STLAlgorithm.h)
+* STL的copy 算法 [示例CopyStudy] (./VS2017Project/Practice/STLAlgorithm.h)
 
-* 运算符重载 [示例](./VS2017Project/Practive/operatorStudy.h)
+* 运算符重载 [示例](./VS2017Project/Practice/operatorStudy.h)
+
+* 数据结构中的查询算法[示例](./VS2017Project/Practice/SearchAlgorithm)
 
 
 # DLL

@@ -183,6 +183,7 @@
     <ClInclude Include="opertaorStudy.h" />
     <ClInclude Include="packagedTaskStudy.h" />
     <ClInclude Include="pointerToMember.h" />
+    <ClInclude Include="SearchAlgorithm.h" />
     <ClInclude Include="shardPtrStudy.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="STLAlgorithm.h" />

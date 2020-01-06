@@ -8,6 +8,7 @@ namespace gugw_stl {
 	struct coutVector
 	{
 	public:
+		//函数操作符，拥有这个操作符的对象，也要函数对象。
 		void operator()(int i)
 		{
 			cout << " " << i;
@@ -39,6 +40,9 @@ namespace gugw_stl {
 		string get_first() const { return first; }
 		string get_second() const { return second; }
 
+		//>>和<<输入输出流，需要用友元。
+		//如果不用友元。那就实现operator const char*()的重载运算符，因为输入输出流可以对const char*进行处理。
+
 		friend istream& operator>>(istream &in, Name& name);
 		friend ostream& operator<<(ostream& out, const Name& name);
 
@@ -69,11 +73,13 @@ namespace gugw_stl {
 		{
 			vector<int> numers1{ 1,3,5,2,4,6,0 };
 			vector<int> numers{ 1,3,5,2,4,6,0 };
+			//此处，numbers.begin()会更好些，
+			//如果容器提供了和算法相同的方法，则优先使用容器的自己的方法。
 			sort(begin(numers), end(numers));
 			for_each(begin(numers), end(numers), coutVector());
 			cout << "\n ===========================================" << endl;
 
-			//便利除了第一个和最后一个元素以外
+			//遍历除了第一个和最后一个元素以外
 			sort(++begin(numers), --end(numers));
 			for_each(++begin(numers), --end(numers), coutVector());
 			cout << "\n ===========================================" << endl;
@@ -91,6 +97,7 @@ namespace gugw_stl {
 			names.push_back(Name("b", "1"));
 			cout << "\n ====sort自定义结构类，自定义排序方法====" << endl;
 			std::sort(std::begin(names), std::end(names), compareName());
+			//lambda表达式，用几次适应了之后，发现真是个好东西。
 			for_each(begin(names), end(names), [](const Name& name) { cout << name.get_first() << name.get_second() << endl; });
 		}
 		void testStableSortClassVector()
@@ -170,7 +177,7 @@ namespace gugw_stl {
 			while ((iter = std::search(iter, end_iter, std::begin(phrase), std::end(phrase), [](char ch1, char ch2) { return std::toupper(ch1) == std::toupper(ch2); })) != end_iter)
 			{
 				++count;
-				std::advance(iter, phrase.size()); // Move to beyond end of subsequence found
+				std::advance(iter, phrase.size()); // Move to beyond end of subsequence found，相当于iter = iter + phrase.size()
 			}
 			std::cout << "\n\"" << phrase << "\" was found " << count << " times." << std::endl;
 			
@@ -207,10 +214,12 @@ namespace gugw_stl {
 			for_each(begin(values), end(values), coutVector());
 			int wanted{ 22 };
 			//11 17 22 36 40 43 48 54 61 70 78 82 89 92 99
+			//找到一个下限，也就是第一个符合
 			auto pr = std::lower_bound(std::begin(values), std::end(values), wanted);
 			//22
 			std::cout << "the lower bound for " << wanted << " is " << *pr << std::endl;
 			//11 17 22 36 40 43 48 54 61 70 78 82 89 92 99
+			//找到一个上限，也就是最后一个符合的后面一个。
 		 pr = std::upper_bound(std::begin(values), std::end(values), wanted);
 			//36
 			std::cout << "the lower bound for " << wanted << " is " << *pr << std::endl;

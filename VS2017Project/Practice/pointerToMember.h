@@ -42,11 +42,13 @@ public:
 	}
 };
 
+//成员函数指针，其实在面向对象编程中，应该很少会使用到这种情况，都可以通过继承和多态方式解决。
 typedef void (Widget::*pMem)(int) const;
 void testPointToDataFunction()
 {
 	Widget w;
 	Widget *wp = &w;
+	//非typedef方式定义
 	void (Widget::*pmem)(int) const = &Widget::h;
 	(w.*pmem)(1);
 	(wp->*pmem)(2);

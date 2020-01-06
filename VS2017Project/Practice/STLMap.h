@@ -107,6 +107,8 @@ public:
 		}
 		cout << mp.bucket_count()<<endl;
 		cout << mp.size()<<endl;
+		//mp.insert(pair<string, string>("aa", "bb"));
+		//mp.insert(make_pair("aa", "bb"));
 	
 	}
 
