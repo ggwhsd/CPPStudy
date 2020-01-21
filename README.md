@@ -38,7 +38,7 @@ using C++ 11  ,vs2017
 
 * [STLVector.h](./VS2017Project/Practice/STLVector.h) 使用`vector`，以及内存地址变化。
 
-* [logger.h](./VS2017Project/Practice/logger.h) 一个自己开发的简约日志库，实现了设置日志级别，以及线程安全记录。只要引用这个头文件，就可以使用，非常简单。
+* [logger.h](./VS2017Project/Practice/logger.h) 一个自己开发的简约日志库，实现了设置日志级别，以及线程安全记录。只要引用这个头文件，就可以使用，非常简单。但是实际当中线程安全还是有问题。
 
 ```cpp
 	GGWlogger mylogger("testfile");
@@ -107,8 +107,9 @@ using C++ 11  ,vs2017
 
 * 运算符重载 [示例](./VS2017Project/Practice/operatorStudy.h)
 
-* 数据结构中的查询算法[示例](./VS2017Project/Practice/SearchAlgorithm)
+* 数据结构中的查询算法[示例](./VS2017Project/Practice/SearchAlgorithm.h)
 
+* RSA加密使用crypto820版本的库的使用 (./VS2017Project/Practice/cryptoStudy.h)
 
 # DLL
 

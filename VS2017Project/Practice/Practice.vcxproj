@@ -75,16 +75,16 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\a\Desktop\GUGW\03CPPcode\20CPPPractice\VS2017Project\Practice\libevent\include;C:\Users\a\Desktop\GUGW\03CPPcode\20CPPPractice\VS2017Project\Practice\glog;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\a\Desktop\GUGW\03CPPcode\20CPPPractice\VS2017Project\Practice\libevent\lib64;C:\Users\a\Desktop\GUGW\03CPPcode\20CPPPractice\VS2017Project\Practice\glog;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\a\Desktop\GUGW\03CPPcode\20CPPPractice\VS2017Project\Practice\libevent\include;C:\Users\a\Desktop\GUGW\03CPPcode\20CPPPractice\VS2017Project\Practice\glog;C:\Users\a\Desktop\GUGW\03CPPcode\20CPPPractice\VS2017Project\Practice\libcrypto820\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\a\Desktop\GUGW\03CPPcode\20CPPPractice\VS2017Project\Practice\libevent\lib64;C:\Users\a\Desktop\GUGW\03CPPcode\20CPPPractice\VS2017Project\Practice\glog;C:\Users\a\Desktop\GUGW\03CPPcode\20CPPPractice\VS2017Project\Practice\libcrypto820\lib64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\Users\a\Desktop\GUGW\03CPPcode\20CPPPractice\VS2017Project\Practice\libevent\include;C:\Users\a\Desktop\GUGW\03CPPcode\20CPPPractice\VS2017Project\Practice\glog;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\a\Desktop\GUGW\03CPPcode\20CPPPractice\VS2017Project\Practice\libevent\lib64;C:\Users\a\Desktop\GUGW\03CPPcode\20CPPPractice\VS2017Project\Practice\glog;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\a\Desktop\GUGW\03CPPcode\20CPPPractice\VS2017Project\Practice\libevent\include;C:\Users\a\Desktop\GUGW\03CPPcode\20CPPPractice\VS2017Project\Practice\glog;C:\Users\a\Desktop\GUGW\03CPPcode\20CPPPractice\VS2017Project\Practice\libcrypto820\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\a\Desktop\GUGW\03CPPcode\20CPPPractice\VS2017Project\Practice\libevent\lib64;C:\Users\a\Desktop\GUGW\03CPPcode\20CPPPractice\VS2017Project\Practice\glog;C:\Users\a\Desktop\GUGW\03CPPcode\20CPPPractice\VS2017Project\Practice\libcrypto820\lib64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -116,7 +116,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\a\Desktop\GUGW\03CPPcode\20CPPPractice\VS2017Project\Practice\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>ws2_32.lib;wsock32.lib;libevent.lib;libevent_core.lib;libevent_extras.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ws2_32.lib;wsock32.lib;libevent.lib;libevent_core.lib;libevent_extras.lib;cryptlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
@@ -156,7 +156,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>LIBCMT;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <AdditionalDependencies>ws2_32.lib;wsock32.lib;libevent.lib;libevent_core.lib;libevent_extras.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ws2_32.lib;wsock32.lib;libevent.lib;libevent_core.lib;libevent_extras.lib;cryptlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -167,6 +167,7 @@
     <ClInclude Include="constStudy.h" />
     <ClInclude Include="coutStudy.h" />
     <ClInclude Include="Cpp11_Function_Study.h" />
+    <ClInclude Include="cryptoStudy.h" />
     <ClInclude Include="exceptionStudy.h" />
     <ClInclude Include="future_promise_test.h" />
     <ClInclude Include="glogStudy.h" />
