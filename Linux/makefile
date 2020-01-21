@@ -1,4 +1,4 @@
-dirs = 01factorial
+dirs = 01factorial 01reciprocal
 
 all:
 	@for dir in $(dirs); do \
