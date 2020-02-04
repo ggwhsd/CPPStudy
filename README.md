@@ -95,7 +95,7 @@ using C++ 11  ,vs2017
 
 * priority_queue的使用示例 [示例](./VS2017Project/Practice/STLMap.h)
 
-* 虚函数\虚基类\纯虚函数（抽象类）的使用示例 [示例](./VS2017Project/Practice/virutalFunStudy.h)
+* 虚函数\虚基类\纯虚函数（抽象类）的使用示例,继承 [示例](./VS2017Project/Practice/virutalFunStudy.h)
 
 * STL的 pair和for_each的自定义处理函数的使用 [示例 STLPairStudy](./VS2017Project/Practice/STLMap.h)
 
