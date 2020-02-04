@@ -12,4 +12,5 @@ VS2017Project/Practice/Debug
 *.filters
 *.user
 .DS_Store
+libcrypto820/
 
