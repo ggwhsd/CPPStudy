@@ -1,4 +1,5 @@
 .gitignore
+glog-master/
 .DS_Store
 Debug/
 *.csv
@@ -12,5 +13,4 @@ VS2017Project/Practice/Debug
 *.filters
 *.user
 .DS_Store
-libcrypto820/
-
+VS2017Project/Practice/libcrypto820
