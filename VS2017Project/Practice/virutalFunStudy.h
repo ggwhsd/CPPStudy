@@ -71,6 +71,7 @@ namespace VirtualTable {
 
 		virtual void h() { cout << "Derive4::h" << endl; }
 	};
+	//C++中，抽象类，就是包含纯虚函数的类。继承抽象类的类，只有实现了所有的纯虚函数，才不是抽象类，否则仍然是抽象类。 抽象类不可以创建对象。
 	class AbstractBase
 	{
 	public:
