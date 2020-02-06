@@ -111,6 +111,8 @@ using C++ 11  ,vs2017
 
 * RSA加密使用crypto820版本的库的使用 (./VS2017Project/Practice/cryptoStudy.h)
 
+* 设置windows的控制台程序的版本号显示:项目->添加->资源->Version，然后双击打开VS_VERSION_INFO文件（可以通过资源视图 Ctrl+Shift+E 查看）
+
 # DLL
 
 * VS2017DLLSolution 里面是有建立托管和非托管dll的示例。

@@ -23,7 +23,7 @@
     <ProjectGuid>{88184610-08EF-483A-B254-D3AAA7734027}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Practice</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -75,8 +75,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\a\Desktop\GUGW\03CPPcode\20CPPPractice\VS2017Project\Practice\libevent\include;C:\Users\a\Desktop\GUGW\03CPPcode\20CPPPractice\VS2017Project\Practice\glog;C:\Users\a\Desktop\GUGW\03CPPcode\20CPPPractice\VS2017Project\Practice\libcrypto820\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\a\Desktop\GUGW\03CPPcode\20CPPPractice\VS2017Project\Practice\libevent\lib64;C:\Users\a\Desktop\GUGW\03CPPcode\20CPPPractice\VS2017Project\Practice\glog;C:\Users\a\Desktop\GUGW\03CPPcode\20CPPPractice\VS2017Project\Practice\libcrypto820\lib64;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Practice\libevent\include;$(SolutionDir)Practice\glog;$(SolutionDir)Practice\libcrypto820\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Practice\libevent\lib64;$(SolutionDir)Practice\glog;$(SolutionDir)Practice\libcrypto820\lib64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -184,6 +184,7 @@
     <ClInclude Include="opertaorStudy.h" />
     <ClInclude Include="packagedTaskStudy.h" />
     <ClInclude Include="pointerToMember.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="SearchAlgorithm.h" />
     <ClInclude Include="shardPtrStudy.h" />
     <ClInclude Include="stdafx.h" />
@@ -211,6 +212,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Practice.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
