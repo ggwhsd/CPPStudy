@@ -27,6 +27,7 @@
 #include <event2/listener.h>
 #include <event2/util.h>
 #include <event2/event.h>
+#include <event2/thread.h>
 #include <conio.h>
 #include "./chronoStudy.h"
 #pragma warning(disable: 4996) // avoid strerror to be warned
@@ -90,6 +91,14 @@ class ServerLib
 			WSADATA wsa_data;
 			WSAStartup(0x0201, &wsa_data);
 #endif
+
+			//使用多线程，否则，其他线程调用libevent发送数据后因为没有事件触发，导致阻塞。
+#ifdef WIN32
+			evthread_use_windows_threads();
+#else
+			evthread_use_pthreads();
+#endif
+
 			//创建事件集，用于后续所有事件
 			base = event_base_new();
 			if (!base) {
@@ -109,6 +118,10 @@ class ServerLib
 				fprintf(stderr, "Could not create a listener!\n");
 				return 1;
 			}
+			else
+			{
+				fprintf(stdout, "port%d!\n", sin.sin_port);
+			}
 			//建立信号事件，回调函数
 			signal_event = evsignal_new(base, SIGINT, signal_cb1, (void *)base);
 			//将信号事件加入到event_base中
@@ -117,7 +130,7 @@ class ServerLib
 				return 1;
 			}
 			//重要函数，循环监听注册的事件，若有，则调用相关的回调函数。
-			event_base_dispatch(base);
+			int rtnCode = event_base_dispatch(base);
 			//释放监听，与evconnlistener_new_bind相对应
 
 			evconnlistener_free(listener);
@@ -128,14 +141,38 @@ class ServerLib
 #ifdef WIN32
 			WSACleanup();
 #endif
-			printf("done\n");
+			printf("done%d\n",rtnCode);
 			return 0;
 		}
 
+		public:
+			void Shutdown()
+			{
+				event_base_loopbreak(base);
+			}
+			void SendMyMessage(string str)
+			{
+				bufferevent_write(bev, str.c_str(), str.length());
+			}
+			void SetBev(bufferevent* b)
+			{
+				if(bev == nullptr)
+					bev = b;
+				else
+				{
+					cout << "error bufferevent is not nullptr; can not set new bev" << endl;
+				}
+			}
+			void ReleaseBev()
+			{
+				bufferevent_free(bev);
+				//bev = nullptr;
+			}
 	private:
 		thread * server;
 		struct event_base *base;
 		string msg;
+		bufferevent* bev = nullptr;
 
 	};
 
@@ -174,6 +211,8 @@ listener_cb1(struct evconnlistener *listener, evutil_socket_t fd,
 	bufferevent_enable(bev, EV_WRITE);
 	bufferevent_enable(bev, EV_READ);
 	bufferevent_setwatermark(bev, EV_READ, 4, 4);
+
+	user->SetBev(bev);
 	//bufferevent_disable(bev, EV_READ);
 	int len = 3;
 	int i = len;
