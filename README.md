@@ -131,4 +131,6 @@ using C++ 11  ,vs2017
 
 * 模板的使用，显式和隐式定义。 [示例](./VS2017DesignAPI/DesignAPI/stack.h)
 
+* Mysql的传统的API使用，支持mysql8.0，当然mysql8.0有全新的支持面向对象的api，这里没有使用。
+
 
