@@ -44,4 +44,11 @@ void testSharedPtr2()
 	shared_ptr<string> pint2 = pint;
 	cout << *pint2 << endl;
 	cout << *pint << endl;
+	
+
+}
+
+shared_ptr<string> testCreatePtr()
+{
+	return make_shared<string>("safe usage!");
 }
