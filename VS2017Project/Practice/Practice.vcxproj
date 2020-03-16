@@ -171,6 +171,7 @@
     <ClInclude Include="exceptionStudy.h" />
     <ClInclude Include="future_promise_test.h" />
     <ClInclude Include="glogStudy.h" />
+    <ClInclude Include="HuffmanTree.h" />
     <ClInclude Include="JSONStudy.h" />
     <ClInclude Include="libeventHello.h" />
     <ClInclude Include="libEventProxy.h" />
