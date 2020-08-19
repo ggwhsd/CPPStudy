@@ -168,6 +168,7 @@
     <ClInclude Include="coutStudy.h" />
     <ClInclude Include="Cpp11_Function_Study.h" />
     <ClInclude Include="cryptoStudy.h" />
+    <ClInclude Include="DirFileStudy.h" />
     <ClInclude Include="exceptionStudy.h" />
     <ClInclude Include="future_promise_test.h" />
     <ClInclude Include="glogStudy.h" />
@@ -194,6 +195,7 @@
     <ClInclude Include="STLVector.h" />
     <ClInclude Include="streamStudy.h" />
     <ClInclude Include="stringStudy.h" />
+    <ClInclude Include="TableDriveExample.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ThreadPoolsStudy.h" />
     <ClInclude Include="ThreadsWaitNotifyManager.h" />

@@ -113,6 +113,10 @@ using C++ 11  ,vs2017
 
 * 设置windows的控制台程序的版本号显示:项目->添加->资源->Version，然后双击打开VS_VERSION_INFO文件（可以通过资源视图 Ctrl+Shift+E 查看）
 
+* 文件夹的创建(./VS2017Project/Practice/DirFileStudy.h)
+
+* 表驱动的编程方式，有效减少if else，聚集代码逻辑。(./VS2017Project/Practice/TableDriveExample.h)
+
 # DLL
 
 * VS2017DLLSolution 里面是有建立托管和非托管dll的示例。
@@ -132,5 +136,7 @@ using C++ 11  ,vs2017
 * 模板的使用，显式和隐式定义。 [示例](./VS2017DesignAPI/DesignAPI/stack.h)
 
 * Mysql的传统的API使用，支持mysql8.0，当然mysql8.0有全新的支持面向对象的api，这里没有使用。
+
+
 
 
