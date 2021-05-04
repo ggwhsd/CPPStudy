@@ -117,6 +117,8 @@ using C++ 11  ,vs2017
 
 * 表驱动的编程方式，有效减少if else，聚集代码逻辑。(./VS2017Project/Practice/TableDriveExample.h)
 
+* windows下的socket，以及int类型的大端序和小端序处理，(./SocketSequence/SocketSequence/SocketSequence.cpp)
+
 # DLL
 
 * VS2017DLLSolution 里面是有建立托管和非托管dll的示例。
