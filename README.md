@@ -109,15 +109,17 @@ using C++ 11  ,vs2017
 
 * 数据结构中的查询算法[示例](./VS2017Project/Practice/SearchAlgorithm.h)
 
-* RSA加密使用crypto820版本的库的使用 (./VS2017Project/Practice/cryptoStudy.h)
+* RSA加密使用crypto820版本的库的使用 [示例](./VS2017Project/Practice/cryptoStudy.h)
 
 * 设置windows的控制台程序的版本号显示:项目->添加->资源->Version，然后双击打开VS_VERSION_INFO文件（可以通过资源视图 Ctrl+Shift+E 查看）
 
-* 文件夹的创建(./VS2017Project/Practice/DirFileStudy.h)
+* 文件夹的创建 [示例](./VS2017Project/Practice/DirFileStudy.h)
 
-* 表驱动的编程方式，有效减少if else，聚集代码逻辑。(./VS2017Project/Practice/TableDriveExample.h)
+* 表驱动的编程方式，有效减少if else，聚集代码逻辑。[示例](./VS2017Project/Practice/TableDriveExample.h)
 
-* windows下的socket，以及int类型的大端序和小端序处理，(./SocketSequence/SocketSequence/SocketSequence.cpp)
+* windows下的socket，以及int类型的大端序和小端序处理，[示例](./SocketSequence/SocketSequence/SocketSequence.cpp)
+
+* 代码方式，线程绑定cpu [示例](./VS2017Project/Practice/CPUBind.h)
 
 # DLL
 

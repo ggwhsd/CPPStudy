@@ -23,7 +23,7 @@
     <ProjectGuid>{88184610-08EF-483A-B254-D3AAA7734027}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Practice</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -167,6 +167,7 @@
     <ClInclude Include="constStudy.h" />
     <ClInclude Include="coutStudy.h" />
     <ClInclude Include="Cpp11_Function_Study.h" />
+    <ClInclude Include="CPUBind.h" />
     <ClInclude Include="cryptoStudy.h" />
     <ClInclude Include="DirFileStudy.h" />
     <ClInclude Include="exceptionStudy.h" />
