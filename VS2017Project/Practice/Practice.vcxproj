@@ -170,6 +170,7 @@
     <ClInclude Include="CPUBind.h" />
     <ClInclude Include="cryptoStudy.h" />
     <ClInclude Include="DirFileStudy.h" />
+    <ClInclude Include="enumClassStudy.h" />
     <ClInclude Include="exceptionStudy.h" />
     <ClInclude Include="future_promise_test.h" />
     <ClInclude Include="glogStudy.h" />
@@ -187,6 +188,7 @@
     <ClInclude Include="opertaorStudy.h" />
     <ClInclude Include="packagedTaskStudy.h" />
     <ClInclude Include="pointerToMember.h" />
+    <ClInclude Include="randStudy.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SearchAlgorithm.h" />
     <ClInclude Include="shardPtrStudy.h" />
@@ -198,9 +200,11 @@
     <ClInclude Include="stringStudy.h" />
     <ClInclude Include="TableDriveExample.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="threadLocalStudy.h" />
     <ClInclude Include="ThreadPoolsStudy.h" />
     <ClInclude Include="ThreadsWaitNotifyManager.h" />
     <ClInclude Include="Thread_condition_variable.h" />
+    <ClInclude Include="traitsStudy.h" />
     <ClInclude Include="va_listStudy.h" />
     <ClInclude Include="virutalFunStudy.h" />
     <ClInclude Include="WindowsFileApi.h" />

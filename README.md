@@ -121,6 +121,14 @@ using C++ 11  ,vs2017
 
 * 代码方式，线程绑定cpu [示例](./VS2017Project/Practice/CPUBind.h)
 
+* enum class [示例](./VS2017Project/Practice/enumClassStudy.h)
+
+* thread_local 作用和java中的ThreadLocal一样。  [示例](./VS2017Project/Practice/threadLocalStudy.h)
+
+* 概率随机数 [示例](./VS2017Project/Practice/randStudy.h)
+
+* type_traits技术 用于判断是什么类型，是否位指针、引用等等。 [示例](./VS2017Project/Practice/traitsStudy.h)
+
 # DLL
 
 * VS2017DLLSolution 里面是有建立托管和非托管dll的示例。
