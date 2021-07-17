@@ -42,6 +42,10 @@ void testVector()
 		++arrIterator;
 
 	}
+	//简化的遍历方式
+	for (int i : intArray) {
+		cout << i << endl;
+	}
 	vector<int>::iterator elFound = find(intArray.begin(), intArray.end(), 2991);
 	if (elFound != intArray.end())
 	{
@@ -50,6 +54,8 @@ void testVector()
 		cout << "found in the vector at position:" << elPos << endl;
 
 	}
+
+
 }
 
 //vector<MyStruct>   push_back;begin;end
