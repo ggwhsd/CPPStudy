@@ -131,6 +131,8 @@ using C++ 11  ,vs2017
 
 * 线程池的实现，融合了vector、queue、thread、future、functional、mutex、condition_variable、std::result_of众多c++11中新添加的元素。 [示例](./VS2017Project/Practice/ThreadPoolsStudy.h)
 
+* udp socket [示例](.\SocketSequence\UdpTest\UdpTest.cpp)
+
 # DLL
 
 * VS2017DLLSolution 里面是有建立托管和非托管dll的示例。
