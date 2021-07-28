@@ -1,0 +1,5 @@
+LIBRARY GugwHiredis
+
+EXPORTS
+Gugw_redisConnect
+Gugw_redisCommand

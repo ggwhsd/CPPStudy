@@ -133,6 +133,15 @@ using C++ 11  ,vs2017
 
 * udp socket [示例](.\SocketSequence\UdpTest\UdpTest.cpp)
 
+* windows下hiredis库的使用，比较麻烦，需要下载windows下的redis源码（github上有），然后编译生成对应的静态库，引入很多对应头文件，才能在自己的项目中使用。
+[示例](.\redisTest\redisTest32\redisTest32.cpp)
+
+* windows下对hiredis库的进一步封装，我叫他为GugwHiredis库，该库把繁琐的hiredis的配置引用封装起来，对外，只提供一个头文件和一个对应的lib和dll，就可以使用hiredis库的功能。使得使用起来简单明了。
+[示例](.\redisTest\GugwHiredis\GugwHiredis.cpp)
+
+* GugwHiredisTest是对GugwHiredis的使用示例，非常简单。
+[示例](.\redisTest\GugwHiredisTest\GugwHiredisTest.cpp)
+
 # DLL
 
 * VS2017DLLSolution 里面是有建立托管和非托管dll的示例。
