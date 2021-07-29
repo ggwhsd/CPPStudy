@@ -142,6 +142,9 @@ using C++ 11  ,vs2017
 * GugwHiredisTest是对GugwHiredis的使用示例，非常简单。
 [示例](.\redisTest\GugwHiredisTest\GugwHiredisTest.cpp)
 
+* 一个开源的网络库，自己手抄了一份windows下的代码。
+[示例](.\networkTacopie\networkTacopie.cpp)
+
 # DLL
 
 * VS2017DLLSolution 里面是有建立托管和非托管dll的示例。
