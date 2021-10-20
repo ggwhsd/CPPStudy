@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/./Types.h
+stdint.h
+-
+string.h
+-
+string
+-
+assert.h
+-
+
+/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/./copyable.h
+
+/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/Date.h
+./copyable.h
+/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/./copyable.h
+./Types.h
+/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/./Types.h
+
+/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/test/Date_test.cc
+../Date.h
+/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/Date.h
+assert.h
+-
+stdio.h
+-
+string
+-
+

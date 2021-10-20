@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/exception_test.dir/exception_test.cpp.o  -o exception_test  -L/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/test/../lib -rdynamic -lmuduo_base -lpthread -Wl,-rpath,/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/test/../lib 

@@ -1,2 +1,2 @@
-export D_LIBRARY_PATH=/Users/GUGW/Desktop/CPP/CPPStudy/Linux/04solib
+export LD_LIBRARY_PATH=/home/gugw/linuxStudy/04solib
 ./usehello_so

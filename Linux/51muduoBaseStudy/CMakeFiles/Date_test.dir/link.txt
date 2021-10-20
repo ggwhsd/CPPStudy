@@ -1,0 +1,1 @@
+/usr/bin/c++   -O3 -DNDEBUG    CMakeFiles/Date_test.dir/test/Date_test.cc.o CMakeFiles/Date_test.dir/Date.cc.o  -o Date_test -rdynamic 

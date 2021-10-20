@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/FileUtil.h
+noncopyable.h
+/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/noncopyable.h
+StringPiece.h
+/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/StringPiece.h
+sys/types.h
+-
+
+/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/StringPiece.h
+string.h
+-
+iosfwd
+-
+Types.h
+/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/Types.h
+
+/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/Types.h
+stdint.h
+-
+string.h
+-
+string
+-
+assert.h
+-
+
+/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/noncopyable.h
+
+/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/test/FileUtil_test.cpp
+../FileUtil.h
+/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/FileUtil.h
+stdio.h
+-
+inttypes.h
+-
+

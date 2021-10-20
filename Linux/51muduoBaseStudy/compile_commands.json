@@ -1,0 +1,77 @@
+[
+{
+  "directory": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy",
+  "command": "/usr/bin/c++    -O3 -DNDEBUG   -std=c++11 -o CMakeFiles/muduo_base.dir/Date.cc.o -c /home/gugw/linuxStudy_VsCode/51muduoBaseStudy/Date.cc",
+  "file": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/Date.cc"
+},
+{
+  "directory": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy",
+  "command": "/usr/bin/c++    -O3 -DNDEBUG   -std=c++11 -o CMakeFiles/muduo_base.dir/TimeZone.cpp.o -c /home/gugw/linuxStudy_VsCode/51muduoBaseStudy/TimeZone.cpp",
+  "file": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/TimeZone.cpp"
+},
+{
+  "directory": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy",
+  "command": "/usr/bin/c++    -O3 -DNDEBUG   -std=c++11 -o CMakeFiles/muduo_base.dir/LogStream.cc.o -c /home/gugw/linuxStudy_VsCode/51muduoBaseStudy/LogStream.cc",
+  "file": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/LogStream.cc"
+},
+{
+  "directory": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy",
+  "command": "/usr/bin/c++    -O3 -DNDEBUG   -std=c++11 -o CMakeFiles/muduo_base.dir/CurrentThread.cpp.o -c /home/gugw/linuxStudy_VsCode/51muduoBaseStudy/CurrentThread.cpp",
+  "file": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/CurrentThread.cpp"
+},
+{
+  "directory": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy",
+  "command": "/usr/bin/c++    -O3 -DNDEBUG   -std=c++11 -o CMakeFiles/muduo_base.dir/Logging.cpp.o -c /home/gugw/linuxStudy_VsCode/51muduoBaseStudy/Logging.cpp",
+  "file": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/Logging.cpp"
+},
+{
+  "directory": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy",
+  "command": "/usr/bin/c++    -O3 -DNDEBUG   -std=c++11 -o CMakeFiles/muduo_base.dir/FileUtil.cpp.o -c /home/gugw/linuxStudy_VsCode/51muduoBaseStudy/FileUtil.cpp",
+  "file": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/FileUtil.cpp"
+},
+{
+  "directory": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy",
+  "command": "/usr/bin/c++    -O3 -DNDEBUG   -std=c++11 -o CMakeFiles/muduo_base.dir/Timestamp.cpp.o -c /home/gugw/linuxStudy_VsCode/51muduoBaseStudy/Timestamp.cpp",
+  "file": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/Timestamp.cpp"
+},
+{
+  "directory": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy",
+  "command": "/usr/bin/c++    -O3 -DNDEBUG   -std=c++11 -o CMakeFiles/muduo_base.dir/Condition.cpp.o -c /home/gugw/linuxStudy_VsCode/51muduoBaseStudy/Condition.cpp",
+  "file": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/Condition.cpp"
+},
+{
+  "directory": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy",
+  "command": "/usr/bin/c++    -O3 -DNDEBUG   -std=c++11 -o CMakeFiles/muduo_base.dir/Exception.cpp.o -c /home/gugw/linuxStudy_VsCode/51muduoBaseStudy/Exception.cpp",
+  "file": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/Exception.cpp"
+},
+{
+  "directory": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy",
+  "command": "/usr/bin/c++    -O3 -DNDEBUG   -std=c++11 -o CMakeFiles/muduo_base.dir/ProcessInfo.cpp.o -c /home/gugw/linuxStudy_VsCode/51muduoBaseStudy/ProcessInfo.cpp",
+  "file": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/ProcessInfo.cpp"
+},
+{
+  "directory": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy",
+  "command": "/usr/bin/c++    -O3 -DNDEBUG   -std=c++11 -o CMakeFiles/muduo_base.dir/LogFile.cpp.o -c /home/gugw/linuxStudy_VsCode/51muduoBaseStudy/LogFile.cpp",
+  "file": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/LogFile.cpp"
+},
+{
+  "directory": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy",
+  "command": "/usr/bin/c++    -O3 -DNDEBUG   -std=c++11 -o CMakeFiles/muduo_base.dir/CountDownLatch.cpp.o -c /home/gugw/linuxStudy_VsCode/51muduoBaseStudy/CountDownLatch.cpp",
+  "file": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/CountDownLatch.cpp"
+},
+{
+  "directory": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy",
+  "command": "/usr/bin/c++    -O3 -DNDEBUG   -std=c++11 -o CMakeFiles/muduo_base.dir/Thread.cpp.o -c /home/gugw/linuxStudy_VsCode/51muduoBaseStudy/Thread.cpp",
+  "file": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/Thread.cpp"
+},
+{
+  "directory": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy",
+  "command": "/usr/bin/c++    -O3 -DNDEBUG   -std=c++11 -o CMakeFiles/muduo_base.dir/ThreadPool.cpp.o -c /home/gugw/linuxStudy_VsCode/51muduoBaseStudy/ThreadPool.cpp",
+  "file": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/ThreadPool.cpp"
+},
+{
+  "directory": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy",
+  "command": "/usr/bin/c++    -O3 -DNDEBUG   -std=c++11 -o CMakeFiles/muduo_base.dir/AsyncLogging.cpp.o -c /home/gugw/linuxStudy_VsCode/51muduoBaseStudy/AsyncLogging.cpp",
+  "file": "/home/gugw/linuxStudy_VsCode/51muduoBaseStudy/AsyncLogging.cpp"
+}
+]
