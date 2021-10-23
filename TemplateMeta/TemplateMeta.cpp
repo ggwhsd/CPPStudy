@@ -4,6 +4,8 @@
 // 参考 https://www.cnblogs.com/qicosmos/p/4480460.html
 
 #include <iostream>
+#include <type_traits>
+#include <utility>
 using namespace std;
 
 
@@ -173,7 +175,85 @@ void test_enable_if()
 }
 
 
+template<typename TYPE>
+bool isCheckInt(TYPE value)
+{
+	if (std::is_same<TYPE, int>::value)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
 
+std::string BoolToString(bool value)
+{
+	return value?"True":"False";
+
+}
+
+void test_typeid_decltype()
+{
+	int a = 12;
+	decltype(a) b = 13;//通过其他变量获取类型进行定义新变量。
+
+	std::cout << "" <<  typeid(b).name()<< endl;
+	std::cout << " 判断a变量的类型是否为int:" << BoolToString(isCheckInt(a))<< endl;
+	
+}
+
+template<typename T>
+struct has_member_f1 {
+private:
+	template<typename U>  //declval根据类型推导变量，跟decltype是相反的
+	static auto Check(int) -> decltype(std::declval<U>().f1(), std::true_type());
+
+	template<typename U>
+	static std::false_type Check(...);
+public:
+	enum { value = std::is_same<decltype(Check<T>(0)), std::true_type>::value };
+};
+
+
+template<typename T>
+struct has_member_m1 {
+private:
+	template<typename U>  //declval根据类型推导变量，跟decltype是相反的
+	static auto Check(int) -> decltype(std::declval<U>().m1, std::true_type());
+
+	template<typename U>
+	static std::false_type Check(...);
+public:
+	enum { value = std::is_same<decltype(Check<T>(0)), std::true_type>::value };
+};
+
+
+class class1
+{
+public:
+	void f1() {
+
+	}
+	int m1;
+};
+
+class class2
+{
+public:
+	void f1() {
+
+	}
+	int m2;
+};
+
+void test_hasMemberFunction()
+{
+	std::cout<<BoolToString(has_member_f1<class1>::value)<<std::endl;
+	std::cout << BoolToString(has_member_m1<class1>::value) << std::endl;
+	std::cout << BoolToString(has_member_m1<class2>::value) << std::endl;
+}
 
 int main()
 {
@@ -185,6 +265,8 @@ int main()
 	test_Decay_FunctionExample();
 	test_result_of();
 	test_enable_if();
+	test_typeid_decltype();
+	test_hasMemberFunction();
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
