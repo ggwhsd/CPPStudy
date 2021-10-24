@@ -131,22 +131,22 @@ using C++ 11  ,vs2017
 
 * 线程池的实现，融合了vector、queue、thread、future、functional、mutex、condition_variable、std::result_of众多c++11中新添加的元素。 [示例](./VS2017Project/Practice/ThreadPoolsStudy.h)
 
-* udp socket [示例](.\SocketSequence\UdpTest\UdpTest.cpp)
+* udp socket [示例](./SocketSequence/UdpTest/UdpTest.cpp)
 
 * windows下hiredis库的使用，比较麻烦，需要下载windows下的redis源码（github上有），然后编译生成对应的静态库，引入很多对应头文件，才能在自己的项目中使用。
-[示例](.\redisTest\redisTest32\redisTest32.cpp)
+[示例](./redisTest/redisTest32/redisTest32.cpp)
 
 * windows下对hiredis库的进一步封装，我叫他为GugwHiredis库，该库把繁琐的hiredis的配置引用封装起来，对外，只提供一个头文件和一个对应的lib和dll，就可以使用hiredis库的功能。使得使用起来简单明了。
-[示例](.\redisTest\GugwHiredis\GugwHiredis.cpp)
+[示例](./redisTest/GugwHiredis/GugwHiredis.cpp)
 
 * GugwHiredisTest是对GugwHiredis的使用示例，非常简单。
-[示例](.\redisTest\GugwHiredisTest\GugwHiredisTest.cpp)
+[示例](./redisTest/GugwHiredisTest/GugwHiredisTest.cpp)
 
 * 一个开源的网络库，自己手抄了一份windows下的代码。
-[示例](.\networkTacopie\networkTacopie.cpp)
+[示例](./networkTacopie/networkTacopie.cpp)
 
 * 模板元编程基础
-[示例](.\TemplateMeta\TemplateMeta.cpp)
+[示例](./TemplateMeta/TemplateMeta.cpp)
 
 # DLL
 
