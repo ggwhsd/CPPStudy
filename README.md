@@ -168,6 +168,10 @@ using C++ 11  ,vs2017
 
 * Mysql的传统的API使用，支持mysql8.0，当然mysql8.0有全新的支持面向对象的api，这里没有使用。
 
+# Linux
+
+* linux相关的示例代码，包括动态库、静态库、cmake、make、系统调用等。
+[示例](./Linux/makefile)
 
 
 
