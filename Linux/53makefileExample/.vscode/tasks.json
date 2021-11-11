@@ -1,0 +1,81 @@
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "C/C++: g++ build active file",
+            "command": "/usr/bin/g++",
+            "args": [
+                "-g",
+                "${file}",
+                "-std=c++11",
+                "-I${workspaceFolder}/gen",
+                "-L${workspaceFolder}/lib",
+                "-lhello" ,
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "type": "shell",
+            "label": "build-libhello-so",
+            "command": "/usr/bin/g++",
+            "args": [
+                "-g",								  //要设置该选项，否则无法单步调试so包中的代码
+                "${workspaceFolder}/gen/hello.cpp",   //so包函数实现的文件
+                "-o",
+                "${workspaceFolder}/lib/libhello.so", //生成的包一定要是lib+包名+.so的形式
+                "-fPIC",                              //生成和位置无关的so文件
+                "-shared"							  //生成动态链接库，即so文件
+            ],
+            "options": {
+                "cwd": "/usr/bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+
+            "label": "make_release",
+            "type": "shell",
+            "command": "pwd; make CFLAG=-O2",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+
+            "label": "make_show",
+            "type": "shell",
+            "command": "pwd; make show",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        }
+    ],
+    "version": "2.0.0"
+}
