@@ -18,6 +18,15 @@
 #define BACKLOG 10
 #define MAXDATASIZE 256
 
+/*
+
+@description:
+   the program will change it self between client and server according to argvs.
+   server mode create a thread for socket to receive msg .
+*/
+
+
+
 int sockfd;
 int oppofd;
 struct hostent *host;
