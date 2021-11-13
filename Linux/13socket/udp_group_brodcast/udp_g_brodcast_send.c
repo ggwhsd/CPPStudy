@@ -24,7 +24,7 @@ int main(int argc, char**argv)
 	socklen = sizeof(struct sockaddr_in);
 	memset(&peeraddr, 0, socklen);
 	peeraddr.sin_family = AF_INET;
-	peeraddr.sin_port = htons(7838);
+	peeraddr.sin_port = htons(9999);
 	if (argv[1]){
 	  if(inet_pton(AF_INET, argv[1], &peeraddr.sin_addr) <= 0){
         print_exit("wrong group address!\n");
