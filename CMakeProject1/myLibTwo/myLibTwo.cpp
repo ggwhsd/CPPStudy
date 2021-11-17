@@ -3,13 +3,12 @@
 
 #include "myLibTwo.h"
 #include <climits>
-
-
-
+#include <string>
+#include "../myLibOne/log.h"
 
 int DynamicLibMethod(int a, int b)
 {
 	
-			return a + b;
-	
+	log(__FUNCTION__);
+	return a + b;
 }

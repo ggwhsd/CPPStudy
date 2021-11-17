@@ -2,10 +2,12 @@
 //
 
 #include "myLibOne.h"
+//#include "log.h"
 #include <climits>
+#include <string>
+void log(std::string);
 int staticLibMethod(int a, int b)
 {
-	
-			return a + b;
-
+	log(__FUNCTION__);
+	return a + b;
 }

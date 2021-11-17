@@ -4,6 +4,5 @@ message("myLibTwo 输出路径:" ${CMAKE_CURRENT_BINARY_DIR})
 IF (CMAKE_SYSTEM_NAME MATCHES "Windows")
 
 	file(COPY ${CMAKE_CURRENT_BINARY_DIR}/Debug/myLibTwo.dll DESTINATION ${CMakeProject1_BINARY_DIR}/${PROJECT_NAME}/Debug/)
-
 ENDIF()
 add_library(myLibTwo SHARED "myLibTwo.cpp" "myLibTwo.h")
