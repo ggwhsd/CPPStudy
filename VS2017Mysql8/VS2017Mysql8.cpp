@@ -4,11 +4,13 @@
 #include <iostream>
 #include <mysql.h>
 #include <vector>
+#include <chrono>
  //https://www.cnblogs.com/cansun/p/8605525.html
  //https://blog.csdn.net/qq_21095573/article/details/82824693
 
 #include <mutex>
 using namespace std;
+using namespace chrono;
 
 class DBService
 {
@@ -42,7 +44,7 @@ private:
 			mysql = mysql_init(NULL);
 			//设置编码方式
 			//mysql_options(&mysql, MYSQL_SET_CHARSET_NAME, "gbk");
-			//"server=192.168.1.103;port=28890;user=foxtrader_1;password=xxffdd123; database=foxmm;";
+			
 			if (mysql_real_connect(mysql, info.Server.c_str(), info.Username.c_str(), info.Password.c_str(), info.Database.c_str(), 3306, NULL, 0) == NULL)
 				isConnected = false;
 			else
@@ -50,14 +52,13 @@ private:
 				isConnected = true;
 			}
 			//查询数据
-			mysql_query(mysql, "select * from users");
+			mysql_query(mysql, "SELECT * FROM studydb.articles");
 			//获取结果集
 			res = mysql_store_result(mysql);
 			while (row = mysql_fetch_row(res))
 			{
-				printf("%s  ", row[0]);//
-				printf("\\t%s  ", row[1]);//
-				printf("\\t%s  ", row[2]);//
+				printf("%s %s %s", row[0], row[1], row[2]);//
+				
 
 			}
 			//释放结果集
@@ -103,10 +104,10 @@ public:
 	void InitDBInfo()
 	{
 		info.Server = "127.0.0.1";
-		info.Password = "xxx";
-		info.Username = "xxx";
+		info.Password = "12345678";
+		info.Username = "testDB";
 		info.Port = 3306;
-		info.Database = "xxx";
+		info.Database = "studydb";
 	}
 	
 	bool IsConnected()
@@ -131,7 +132,7 @@ public:
 			char tmp[400];
 			
 			//查询数据
-			mysql_query(mysql, "select * from users");
+			mysql_query(mysql, "SELECT * FROM studydb.articles");
 			//获取结果集
 			res = mysql_store_result(mysql);
 			while (row = mysql_fetch_row(res))
@@ -159,7 +160,7 @@ public:
 			char tmp[400];
 
 			//查询数据
-			mysql_query(mysql, "select * from users");
+			mysql_query(mysql, "SELECT * FROM studydb.articles");
 			//获取结果集
 			res = mysql_store_result(mysql);
 			MYSQL_FIELD* field ;
@@ -168,7 +169,7 @@ public:
 			auto iterCol = cols.begin();
 			while (iterCol != cols.end())
 			{
-				cout << (*iterCol).c_str() << endl;
+				cout << (*iterCol).c_str() << " ";
 				iterCol++;
 			}
 
@@ -179,7 +180,7 @@ public:
 				vector<string>::iterator iterValue = (*iterRow).begin();
 				while (iterValue != (*iterRow).end())
 				{
-					cout << (*iterValue).c_str() << endl;
+					cout << (*iterValue).c_str() << " ";
 					iterValue++;
 				}
 				
@@ -237,6 +238,65 @@ public:
 		return value_rows;
 	}
 
+	void WriteData()
+	{
+		string sql = "delete from articles"; //关闭自动提交
+		int rt = mysql_query(mysql, sql.c_str());
+		if (rt != 0)
+		{
+			cout << "执行sql 错误" << mysql_error(mysql) << endl;
+		}
+
+		// sql = "set autocommit = 0"; //关闭自动提交
+		// rt = mysql_query(mysql, sql.c_str());
+		//if (rt != 0)
+		//{
+		//	cout << "执行sql 错误" << mysql_error(mysql) << endl;
+		//}
+
+#pragma region 事务必须要有提交或者回滚，对于事务，autocommit不生效，对于非事务默认生效
+
+
+
+		auto start = system_clock::now();
+		sql = "START TRANSACTION";
+		 rt = mysql_query(mysql, sql.c_str());
+		if (rt != 0)
+		{
+			cout << "执行START TRANSACTION 错误" << mysql_error(mysql) << endl;
+		}
+
+
+		for (int i = 0; i < 1000; i++)
+		{
+			sql = "INSERT INTO articles (pageid, authorid) VALUES ('9', '2');";
+			rt = mysql_query(mysql, sql.c_str());
+			if (rt != 0)
+				cout << "执行insert sql出错" << mysql_error(mysql)<<endl;
+		}
+
+		sql = "COMMIT";
+		 rt = mysql_query(mysql, sql.c_str());
+		if (rt != 0)
+		{
+			cout << "执行COMMIT错误" << mysql_error(mysql) << endl;
+		}
+
+#pragma endregion
+
+
+		auto end = system_clock::now();
+
+		// sql = "set autocommit = 1"; //打开自动提交
+		// rt = mysql_query(mysql, sql.c_str());
+		//if (rt != 0)
+		//{
+		//	cout << "执行sql 错误" << mysql_error(mysql) << endl;
+		//}
+		auto dur = duration_cast<milliseconds>(end - start);
+		cout << "耗时:【" << dur.count() << "】毫秒";
+	}
+
 };
 
 DBService::Ptr DBService::instance = nullptr;
@@ -251,6 +311,8 @@ int main()
 	std::cout << DBService::GetInstance()->TestSelect() << endl;
 
 	DBService::GetInstance()->TestGetResult("");
+
+	DBService::GetInstance()->WriteData();
 
 
 	//注意你连接的账户名密码
