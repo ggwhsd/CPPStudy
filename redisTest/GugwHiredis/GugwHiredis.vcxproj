@@ -73,6 +73,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>C:\Users\a\Desktop\GUGW\03CPPcode\redis3.2.100\redis;C:\Users\a\Desktop\GUGW\03CPPcode\redis3.2.100\redis\deps\hiredis;$(IncludePath)</IncludePath>
+    <LibraryPath>$(projectdir)lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
@@ -83,6 +84,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\Users\a\Desktop\GUGW\03CPPcode\redis3.2.100\redis;C:\Users\a\Desktop\GUGW\03CPPcode\redis3.2.100\redis\deps\hiredis;$(IncludePath)</IncludePath>
+    <LibraryPath>$(projectdir)lib64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -161,6 +164,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
       <ModuleDefinitionFile>MyhiRedis.def</ModuleDefinitionFile>
+      <AdditionalDependencies>hiredis.lib;Win32_Interop.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

@@ -50,22 +50,33 @@ Gugw::Gugw_redisReply Gugw::Gugw_redisCommand(int redisContextIndex, const char*
 
 	Gugw::Gugw_redisReply reply;
 	reply.redisError = -1;
-
+	reply.replayMsg = "";
 	if (nullptr == pRedisContext)
 		return reply;
 	//获取redis的回报
 	redisReply *pRedisReply = (redisReply*)redisCommand(pRedisContext, command);
-
 	if (nullptr == pRedisReply)
 	{
 		return reply;
 	}
 	
 	//转换为我们客户端的回报
-	
-	reply.replayMsg = pRedisReply->str;
-	reply.redisError = 0;
+	if (pRedisReply->len > 0)
+	{
 
+		reply.replayMsg = pRedisReply->str;
+	}
+	else
+	{
+		
+	}
+	if (pRedisReply->type == REDIS_REPLY_NIL)
+		reply.redisError = 4;
+	else if (pRedisReply->type == REDIS_REPLY_ERROR)
+		reply.redisError = 6;
+	else
+		reply.redisError = 0;
+	
 	freeReplyObject(pRedisReply);
 	return reply;
 }

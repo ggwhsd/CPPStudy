@@ -12,7 +12,7 @@ int redisHandler;
 char buffer[1024] = { 0 };
 int testOne()
 {
-	redisHandler = Gugw::Gugw_redisConnect("127.0.0.1", 6379);
+	redisHandler = Gugw::Gugw_redisConnect("192.168.101.21", 6379);
 	if (redisHandler == -1)
 	{
 		return 0;
@@ -21,12 +21,32 @@ int testOne()
 
 	sprintf_s(buffer, 1024, "AUTH %s", pszRedisPwd);
 	Gugw::Gugw_redisReply reply = Gugw::Gugw_redisCommand(redisHandler, buffer);
-	std::cout << "结果为:" << reply.replayMsg << std::endl;
+	std::cout << "结果1为:" << reply.replayMsg << " "<< reply.redisError<< std::endl;
 
 
 	sprintf_s(buffer, "GET %s", "name");
 	reply = Gugw::Gugw_redisCommand(redisHandler, buffer);
-	std::cout << "结果为:" << reply.replayMsg << std::endl;
+	std::cout << "结果2为:" << reply.replayMsg << " " << reply.redisError << std::endl;
+
+
+	
+	sprintf_s(buffer, "SET keyName1 %s", "Name3");
+	reply = Gugw::Gugw_redisCommand(redisHandler, buffer);
+	std::cout << "结果3为:" << reply.replayMsg << " " << reply.redisError << std::endl;
+
+	sprintf_s(buffer, "GET %s", "keyName1");
+	reply = Gugw::Gugw_redisCommand(redisHandler, buffer);
+	std::cout << "结果4为:" << reply.replayMsg << " " << reply.redisError << std::endl;
+
+	sprintf_s(buffer, "GET %s", "keyName2");
+	reply = Gugw::Gugw_redisCommand(redisHandler, buffer);
+	std::cout << "结果5为:" << reply.redisError << std::endl;
+
+
+
+	sprintf_s(buffer, "GET %s", "name");
+	reply = Gugw::Gugw_redisCommand(redisHandler, buffer);
+	std::cout << "结果6为:" << reply.replayMsg << " " << reply.redisError << std::endl;
 }
 
 void testTwo()
@@ -41,7 +61,7 @@ typedef chrono::time_point<chrono::steady_clock, chrono::milliseconds> milliCloc
 int main()
 {
 	testOne();
-	int iMax = 1000 * 1000;
+	int iMax = 100 * 1000;
 	milliClock_type temp_now = chrono::time_point_cast<chrono::milliseconds>(chrono::steady_clock::now());
 	int i = 0;
 	while (i < iMax)
