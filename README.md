@@ -125,6 +125,8 @@ using C++ 11  ,vs2017
 
 * thread_local 作用和java中的ThreadLocal一样。  [示例](./VS2017Project/Practice/threadLocalStudy.h)
 
+* placement new的使用。 [示例](./VS2017Project/Practice/placeNew.h)
+
 * 概率随机数 [示例](./VS2017Project/Practice/randStudy.h)
 
 * type_traits技术 用于判断是什么类型，是否位指针、引用等等。 [示例](./VS2017Project/Practice/traitsStudy.h)

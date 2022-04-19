@@ -187,6 +187,7 @@
     <ClInclude Include="NLOHMANN_JSON.h" />
     <ClInclude Include="opertaorStudy.h" />
     <ClInclude Include="packagedTaskStudy.h" />
+    <ClInclude Include="placeNew.h" />
     <ClInclude Include="pointerToMember.h" />
     <ClInclude Include="randStudy.h" />
     <ClInclude Include="resource.h" />
