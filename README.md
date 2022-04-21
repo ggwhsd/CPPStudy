@@ -83,7 +83,8 @@ using C++ 11  ,vs2017
 
 * glog日志工程，基于32和64的vs2017工程解决方案[工程](./glog-master)
 
-* [ThreadsWaitNotifyManager.h](./VS2017Project/Practice/ThreadsWaitNotifyManager.h)使用了union结构，模拟实现了事件加入到事件队列以及被消费的过程，使用的是一个队列。union最好使用基本的struct结构，不要涉及到指针等类。
+使用了union结构，模拟实现了事件加入到事件队列以及被消费的过程，使用的是一个队列。union最好使用基本的struct结构，不要涉及到指针等类。
+* [ThreadsWaitNotifyManager.h](./VS2017Project/Practice/ThreadsWaitNotifyManager.h)
 
 * STL的一些杂笔记[示例](./VS2017STL/STLTest.cpp)
 
@@ -125,8 +126,6 @@ using C++ 11  ,vs2017
 
 * thread_local 作用和java中的ThreadLocal一样。  [示例](./VS2017Project/Practice/threadLocalStudy.h)
 
-* placement new的使用。 [示例](./VS2017Project/Practice/placeNew.h)
-
 * 概率随机数 [示例](./VS2017Project/Practice/randStudy.h)
 
 * type_traits技术 用于判断是什么类型，是否位指针、引用等等。 [示例](./VS2017Project/Practice/traitsStudy.h)
@@ -149,6 +148,11 @@ using C++ 11  ,vs2017
 
 * 模板元编程基础
 [示例](./TemplateMeta/TemplateMeta.cpp)
+
+* placement new的使用。 
+[示例](./VS2017Project/Practice/placeNew.h)
+
+
 
 # DLL
 

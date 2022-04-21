@@ -201,6 +201,7 @@
     <ClInclude Include="stringStudy.h" />
     <ClInclude Include="TableDriveExample.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="threadAtomic.h" />
     <ClInclude Include="threadLocalStudy.h" />
     <ClInclude Include="ThreadPoolsStudy.h" />
     <ClInclude Include="ThreadsWaitNotifyManager.h" />

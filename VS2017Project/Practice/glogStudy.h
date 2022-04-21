@@ -67,3 +67,34 @@ void testGlog()
 	google::ShutdownGoogleLogging();
 
 }
+
+class MyLogSink : public LogSink
+{
+public:
+	virtual void send(LogSeverity severity, const char* full_filename,
+		const char* base_filename, int line,
+		const struct ::tm* tm_time,
+		const char* message, size_t message_len)
+	{
+		cout << __FUNCTION__ << " " << severity << " " << full_filename << " " << base_filename << " " << line << " " << tm_time->tm_hour << ":" << tm_time->tm_sec << " " << message << endl;
+	}
+
+
+};
+
+
+void testGlogSink()
+{
+	google::InitGoogleLogging("loglog");
+	google::SetLogDestination(google::GLOG_INFO, "G:\\temp\\INFO_");
+	google::SetStderrLogging(google::GLOG_FATAL);
+	google::SetLogFilenameExtension("log_");
+	FLAGS_colorlogtostderr = true;  // Set log color
+	FLAGS_logbufsecs = 0;  // Set log output speed(s)
+	FLAGS_max_log_size = 1024;  // Set max log file size
+	FLAGS_stop_logging_if_full_disk = true;  // If disk is full
+	MyLogSink mySink;
+	LOG_TO_SINK(&mySink, INFO) << " test my Sink";
+	LOG(INFO) << " test file log";
+	google::ShutdownGoogleLogging();
+}
