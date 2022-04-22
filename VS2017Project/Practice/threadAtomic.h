@@ -1,5 +1,5 @@
 #pragma once
-
+#include <assert.h>
 
 #include <thread>
 #include <iostream>
@@ -148,4 +148,63 @@ void TestAtomicFlag()
 		th.join();
 
 	
+}
+
+
+
+void TestAtomicMemoryOrder()
+{
+	int a = 0;
+	atomic<int> b = 0;
+	atomic<int> c = 0;
+
+	thread t1([&a,&b,&c]() {
+		a = 1;
+		b.store(2, std::memory_order_relaxed);
+		c.store(3, memory_order_release);
+	});
+
+	thread t2([&a, &b, &c]() {
+		//此处用了load memory_order_acquire，
+		//如果出现c的值等于3，则会对c使用过release语义之前的所有写操作，
+		//比如线程t1中的三行语句写入操作，都会可见，所以在此场景下，读到的a必然为1，b必然为2
+		while (c.load(memory_order_acquire) != 3);
+
+		assert(a == 1 && b == 2);
+		assert(b.load(memory_order_relaxed) == 2);
+	});
+	
+	t2.detach();
+	t1.detach();
+}
+
+
+void TestAtomicMemoryOrderConsume()
+{
+	int a = 0;
+	atomic<int> b = 0;
+	atomic<int> c = 0;
+
+	thread t2([&a, &b, &c]() {
+		//此处用了load memory_order_consume，
+		//如果出现c的值等于3，则会对c使用过release语义之前的所有对c的所有写操作，
+		//比如线程t1中的三行语句写入操作，只有c.store是保证可见的，对于a和b都是不一定的，所以在此场景下，读到的c必然为3，其他都是未必
+		while (c.load(memory_order_consume) != 3);
+
+		assert(a == 1 && b == 2);
+		assert(b.load(memory_order_relaxed) == 2);
+		std::cout << "Hello World!有时候你会看不到这句话\n";
+
+	});
+
+	thread t1([&a, &b, &c]() {
+		a = 1;
+		b.store(2, std::memory_order_relaxed);
+		c.store(3, memory_order_release);
+	});
+
+
+
+	t2.detach();
+	t1.detach();
 }
