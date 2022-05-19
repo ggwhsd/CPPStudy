@@ -41,16 +41,16 @@ void testGlog2()
 void testGlog()
 {
 	// Start google log system:
-	FLAGS_log_dir = "E:\\logs";
+	FLAGS_log_dir = ".\\log\\";
 	google::InitGoogleLogging("loglog");
-	google::SetLogDestination(google::GLOG_INFO, "E:\\logs\\INFO_");
+	google::SetLogDestination(google::GLOG_INFO, ".\\logs\\glog");
 	google::SetStderrLogging(google::GLOG_FATAL);
 	google::SetLogFilenameExtension("log_");
-	FLAGS_colorlogtostderr = true;  // Set log color
-	FLAGS_logbufsecs = 0;  // Set log output speed(s)
-	FLAGS_max_log_size = 1024;  // Set max log file size
-	FLAGS_stop_logging_if_full_disk = true;  // If disk is full
 
+	FLAGS_colorlogtostderr = true;  // Set log color
+	FLAGS_logbufsecs = 5;  // Set log output speed(s)
+	FLAGS_max_log_size = 50;  // Set max log file size
+	FLAGS_stop_logging_if_full_disk = true;  // If disk is full
 	thread *t = new thread(testGlog2);
 	
 	char str[20] = "hello log!";
