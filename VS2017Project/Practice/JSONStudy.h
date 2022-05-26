@@ -172,18 +172,20 @@ namespace JSONSTUDY {
 		{
 			vector<Person> persons;
 		};
-
+		//重载如下函数方法进行序列化和反序列化
 		 void to_json(json& j, const Person& p) {
 				j = json{ {"name",p.name},{"age",p.age} };   //设置 结构中的字段与json中的key对照关系，name和age可以随意改成我们想映射的名字，最终显示到json字符串里面。
 			}
-
+		 //重载如下函数方法进行序列化和反序列化
 		 void from_json(const json& j, Person& p) {
 				p.name = j.at("name").get<string>();
 				p.age = j.at("age").get<int>();
 			}
+		 //重载如下函数方法进行序列化和反序列化
 		 void to_json(json& j, const Persons& ps) {
 			 j = json{ { "persons", ps.persons } };
 		 }
+		 //重载如下函数方法进行序列化和反序列化
 		 void from_json(const json& j, Persons& ps) {
 			 ps.persons = j.at("persons").get<vector<Person>>();
 		 }
