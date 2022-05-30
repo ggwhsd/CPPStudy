@@ -9,7 +9,7 @@ using namespace std;
 
 struct dataTest
 {
-	int field1;
+	event* field1;
 	int field2;
 };
 
@@ -38,6 +38,15 @@ public:
 	{
 		tv_sec = { seconds, microseconds };
 		event *timeout = event_new(base, -1, EV_PERSIST | EV_TIMEOUT, cb, dt);
+		dt->field1 = timeout;
+		event_add(timeout, &tv_sec);
+	}
+
+	void addOnceTimer(int seconds, int microseconds, event_callback_fn cb, dataTest* dt)
+	{
+		tv_sec = { seconds, microseconds };
+		event* timeout = event_new(base, -1,  EV_TIMEOUT, cb, dt);
+		dt->field1 = timeout;
 		event_add(timeout, &tv_sec);
 	}
 };
@@ -46,13 +55,19 @@ public:
 void cb(evutil_socket_t fd, short what, void *arg)
 {
 	dataTest *dt = (dataTest*)arg;
-	cout << getSystemClock_microSeconds()<<"event ocurrence every 0.5"  << "  seconds.  dataTest:" << dt->field1 + dt->field2 << endl;
+	dt->field2--;
+	
+	cout << getSystemClock_microSeconds()<<"event ocurrence every 10ms"  << "  seconds.  dataTest:" <<  dt->field2 << endl;
+	if (dt->field2 < 0)
+	{
+		event_del(dt->field1);
+	}
 	
 }
 
 //////ртобн╙╡Бйт////////
 
-dataTest dt{ 1, 3 };
+dataTest dt{ nullptr, 3 };
 void threadWork(Timer* timer)
 {
 	
@@ -60,8 +75,11 @@ void threadWork(Timer* timer)
 	cout << "wait for 3 sencond" << endl;
 	std::this_thread::sleep_for(std::chrono::milliseconds(3000));
 	cout << getSystemClock_microSeconds() << "add timer:" << endl;
-		timer->addTimer(0, 900000, cb, &dt);
-	dt.field2 = 1000;
+		timer->addTimer(0, 1000*1000, cb, &dt);
+
+	dt.field2 = 10;
+
+	
 }
 
 void TimerTest()
