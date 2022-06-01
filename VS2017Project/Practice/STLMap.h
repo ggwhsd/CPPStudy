@@ -19,10 +19,17 @@ public:
 	~STLMapTest() {}
 	void insert()
 	{
-		cout << "插入三条记录" << endl;
-		messages.insert(pair<int,string>(++NO,"Tom1"));
+		cout << "插入n条记录" << endl;
+		messages.insert(pair<int, string>(++NO, "Tom1"));
 		messages.insert(pair<int, string>(++NO, "Tom2"));
 		messages.insert(pair<int, string>(++NO, "Tom3"));
+		for (int i = 0; i < 100; i++)
+		{
+			messages.insert(pair<int, string>(++NO, "Tom"));
+		}
+		messages.insert(pair<int, string>(0, "Begin"));
+		messages.insert(pair<int, string>(++NO, "End"));
+		
 	}
 	void insert2()
 	{

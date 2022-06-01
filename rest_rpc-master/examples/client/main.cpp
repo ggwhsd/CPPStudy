@@ -639,14 +639,59 @@ void benchmark_test() {
 
 
 
+long long GetTime()
+{
+    return std::chrono::time_point_cast<std::chrono::microseconds>(std::chrono::steady_clock::now()).time_since_epoch().count();
+}
+void testAsioTimer()
+{
+    asio::io_context ioc;
+    std::vector<long long> timePoint;
+    asio::steady_timer timer_(ioc, std::chrono::seconds(3));
+    timePoint.push_back(GetTime());
+    timer_.wait();
+    timePoint.push_back(GetTime());
+    std::cout << "同步定时器" << std::endl;
+
+    timer_.expires_from_now(std::chrono::milliseconds(1));
+
+    timer_.async_wait([&timePoint](asio::error_code ec) {
+        if (ec) {
+            return;
+        }
+        
+        
+        timePoint.push_back(GetTime());
+
+        });
+    timer_.async_wait([&timePoint](asio::error_code ec) {
+        if (ec) {
+            return;
+        }
+
+        timePoint.push_back(GetTime());
+        });
+    ioc.run();
+    for_each(timePoint.begin(), timePoint.end(), [](long long value) {  std::cout << value << std::endl;  });
+    std::cout << "异步定时器" << std::endl;
+
+
+
+
+    std::cout << " finished " << std::endl;
+}
+
+
 int main() {
+
+    testAsioTimer();
   //benchmark_test();
  
   //test_connect();
   
-  test_callback();
-  test_echo();
-  test_sync_client();
+  //test_callback();
+  //test_echo();
+  //test_sync_client();
   /*
   test_async_client();
   test_threads();
