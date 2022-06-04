@@ -14,3 +14,5 @@ VS2017Project/Practice/Debug
 *.user
 .DS_Store
 VS2017Project/Practice/libcrypto820
+x64-Debug/
+
