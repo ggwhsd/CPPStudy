@@ -318,6 +318,7 @@ void test_connect() {
 }
 
 void test_callback() {
+
   rpc_client client;
   bool r = client.connect("127.0.0.1", 9000);
   if (r == false)
@@ -682,22 +683,87 @@ void testAsioTimer()
 }
 
 
+class TimeWatch
+{
+public:
+    TimeWatch()
+    {
+        start = GetTime();
+    }
+    void restart()
+    {
+        start = GetTime();
+
+    }
+    void stop()
+    {
+        end = GetTime();
+    }
+    long long getElapsedMicroNow()
+    {
+       
+        return  GetTime() - start;
+    }
+    long long getElapsedMicro()
+    {
+
+        return end - start;
+    }
+    
+private:
+    long long start;
+    long long end;
+    
+};
+
+void test_rtt()
+{
+    TimeWatch tw;
+    rpc_client client;
+    tw.restart();
+    bool r = client.connect("127.0.0.1", 9000);
+   
+    std::cout << "网络连接耗时 us:" << tw.getElapsedMicroNow() << std::endl;;
+    
+    if (r == false)
+    {
+        std::cout << "网络连接失败 " << '\n';
+        return;
+    }
+
+    std::function<void(asio::error_code, string_view)> callback1 = [](const asio::error_code& ec, string_view data) {
+        auto str = as<int>(data);
+    };
+    tw.restart();
+    client.async_call<0>("getSum", callback1, 1, 2);
+    std::cout << "async_call调用耗时 us:" << tw.getElapsedMicroNow()<<std::endl;
+    tw.restart();
+    int sumValue = client.call<int>("getSum", 1, 2);
+    std::cout << "call调用耗时 us:" << tw.getElapsedMicroNow() << std::endl;
+
+    std::this_thread::sleep_for(std::chrono::seconds(3));
+  
+    return;
+}
+
 int main() {
 
-    testAsioTimer();
-  //benchmark_test();
+    ////ok// testAsioTimer();
+ ////ok// benchmark_test();
  
-  //test_connect();
+  /////ok// test_connect();
   
-  //test_callback();
-  //test_echo();
+  ////ok//  test_callback();
+
+    test_rtt();
+  
   //test_sync_client();
   /*
+  * test_echo();
   test_async_client();
   test_threads();
   test_sub1();
   test_call_with_timeout();
-  test_connect();
   test_upload();
   test_download();
   multi_client_performance(20);
