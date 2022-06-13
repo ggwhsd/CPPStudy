@@ -392,17 +392,17 @@ void wait_for_notification(rpc_client &client) {
                        });
 }
 
-void test_sub1() {
+void test_sub1(std::string ip, int port) {
   rpc_client client;
   client.enable_auto_reconnect();
   client.enable_auto_heartbeat();
-  bool r = client.connect("127.0.0.1", 9000);
+  bool r = client.connect(ip, port);
   if (!r) {
     return;
   }
 
   client.subscribe("key", [](string_view data) { std::cout << data << "\n"; });
-
+  /*
   client.subscribe(
       "key", "048a796c8a3c6a6b7bd1223bf2c8cee05232e927b521984ba417cb2fca6df9d1",
       [](string_view data) {
@@ -431,6 +431,7 @@ void test_sub1() {
       }
     }
   });
+  */
 
   /*rpc_client client1;
   bool r1 = client1.connect("127.0.0.1", 9000);
@@ -746,17 +747,32 @@ void test_rtt()
     return;
 }
 
-int main() {
 
+std::string host_ip = "127.0.0.1";
+int host_port = 9000;
+int main(int argc , char *argv[]) {
+
+    if (argc >= 2)
+    {
+        host_ip = argv[1];
+        std::cout << "ip:" << host_ip << std::endl;
+    }
+    if (argc >= 3)
+    {
+        host_port = atoi(argv[2]);
+        std::cout << "port:" << host_port << std::endl;
+    }
+   
     ////ok// testAsioTimer();
- ////ok// benchmark_test();
+    ////ok// benchmark_test();
  
-  /////ok// test_connect();
+    /////ok// test_connect();
   
-  ////ok//  test_callback();
+    ////ok//  test_callback();
 
-    test_rtt();
-  
+   ////ok// test_rtt();
+
+   test_sub1(host_ip, host_port);
   //test_sync_client();
   /*
   * test_echo();

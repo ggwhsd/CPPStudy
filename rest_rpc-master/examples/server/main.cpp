@@ -159,8 +159,10 @@ int main() {
   bool stop = false;
   std::thread thd([&server, &stop] {
     person p{1, "tom", 20};
+    int i = 0;
     while (!stop) {
-      server.publish("key", "hello subscriber");
+        i++;
+      server.publish("key", std::string("hello subscriber ") + std::to_string(i));
       auto list = server.get_token_list();
       for (auto &token : list) {
         server.publish_by_token("key", token, p);
