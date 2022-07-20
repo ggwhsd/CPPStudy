@@ -152,6 +152,8 @@ using C++ 11  ,vs2017
 * placement new的使用。 
 [示例](./VS2017Project/Practice/placeNew.h)
 
+* 命令行解析库cmdline的使用，对cmdline稍有更改。
+[示例](./VS2017Project/Practice/cmdlineExample.h)
 
 
 # DLL
