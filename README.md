@@ -155,6 +155,9 @@ using C++ 11  ,vs2017
 * 命令行解析库cmdline的使用，对cmdline稍有更改。
 [示例](./VS2017Project/Practice/cmdlineExample.h)
 
+* 一个简单的对象池示例。
+[示例](./VS2017Project/Practice/ObjectPoolStudy.h)
+
 
 # DLL
 

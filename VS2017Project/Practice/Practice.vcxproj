@@ -189,6 +189,7 @@
     <ClInclude Include="mathTest.h" />
     <ClInclude Include="NetBigEndStudy.h" />
     <ClInclude Include="NLOHMANN_JSON.h" />
+    <ClInclude Include="ObjectPoolStudy.h" />
     <ClInclude Include="opertaorStudy.h" />
     <ClInclude Include="packagedTaskStudy.h" />
     <ClInclude Include="placeNew.h" />
