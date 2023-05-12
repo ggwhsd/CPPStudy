@@ -61,7 +61,7 @@ int encodePackageToBufferBytes2(char *send_buf, Package& p)
 
 
 
-void StartClient(int port)
+void StartClient(std::string hostIP,int port, int testCounts)
 {
 	WSADATA WSAData;
 	SOCKET sock;
@@ -70,7 +70,7 @@ void StartClient(int port)
 	struct sockaddr_in ClientAddr;
 	ClientAddr.sin_family = AF_INET;
 	ClientAddr.sin_port = htons(port);
-	ClientAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+	ClientAddr.sin_addr.s_addr = inet_addr(hostIP.c_str());
 	connect(sock, (sockaddr*)&ClientAddr, sizeof(ClientAddr));
 
 	char snd_buf[1024] = { 0 };
@@ -79,21 +79,24 @@ void StartClient(int port)
 	SetPackage(p);
 	//int send_len = encodePackageToBufferBytes(snd_buf, p);
 	//send(sock, snd_buf, send_len, 0);
-	int sendCount = 1000000;
 	printf("start send%s", getNow().c_str());
-	while (sendCount > 0)
+	while (testCounts > 0)
 	{
-		sendCount--;
-		memset(snd_buf, 0, 1024);
+		testCounts--;
+		p.msg.age2 = 1;
+		int sendCount = 1000000;
+		while (sendCount > 0)
+		{
+			sendCount--;
+			memset(snd_buf, 0, 1024);
 
-		int send_len = encodePackageToBufferBytes2(snd_buf, p);
-		send(sock, snd_buf, send_len, 0);
-		p.msg.age2 += 1;
-		strcpy(p.msg.client_name,std::to_string(p.msg.age2).c_str());
-		
+			int send_len = encodePackageToBufferBytes2(snd_buf, p);
+			send(sock, snd_buf, send_len, 0);
+			p.msg.age2 += 1;
+			strcpy(p.msg.client_name, std::to_string(p.msg.age2).c_str());
+		}
 	}
 	printf("stop send%s", getNow().c_str());
 	closesocket(sock);
 	WSACleanup();
-
 }

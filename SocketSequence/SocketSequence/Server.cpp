@@ -105,7 +105,7 @@ std::shared_ptr<Package> decodePackageToBufferBytes2(char *recv, int len)
 }
 
 
-void StartServer(int port)
+void StartServer(int port,int testCounts)
 {
 
 	WSADATA WSAData;
@@ -126,9 +126,10 @@ void StartServer(int port)
 	msgsock = accept(sock, (LPSOCKADDR)0, (int *)0);
 #pragma region  单个socket接收
 
+	printf("start recv%s", getNow().c_str());
 	int len_recv = -1;
 	len_recv = recv(msgsock, buf, sizeof(buf), 0);
-	printf("start recv%s", getNow().c_str());
+	
 	//decodeBytesToPackage(buf);//测试而已，不考虑粘包问题了。
 	while (len_recv > 0)
 	{
@@ -136,17 +137,16 @@ void StartServer(int port)
 		auto package = decodePackageToBufferBytes2(buf, len_recv);//考虑粘包
 		while (package != nullptr)
 		{
-			if (package->msg.age2 == 1000000)
-			{
-				printf("end recv%s", getNow().c_str());
-				printf("测试结束");
-			}
+			
 			package = decodePackageToBufferBytes2(nullptr, 0);
 		}
 		len_recv = recv(msgsock, buf , sizeof(buf), 0);
-
+		
+			
+		
 	}
-
+	printf("end recv%s", getNow().c_str());
+	printf("测试结束");
 	closesocket(sock);
 
 

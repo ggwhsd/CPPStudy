@@ -30,13 +30,16 @@ int main()
 	if (choice == 1)
 	{
 		//client
+		std::string ip = "";
+		std::cout << "enter server ip:\r\n:";
+		std::cin >> ip;
 		std::cout << "\r\n启动客户端11111端口";
-		StartClient(11111);
+		StartClient(ip,11111,1);
 	}
 	else
 	{
 		std::cout << "\r\n启动服务端11111端口";
-		StartServer(11111);
+		StartServer(11111,1);
 	}
     std::cout << "Hello World!\n";
 }

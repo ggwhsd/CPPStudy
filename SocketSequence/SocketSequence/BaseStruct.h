@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 typedef struct Info
 {
@@ -18,6 +19,6 @@ struct Package
 
 
 
-void StartClient(int port);
+void StartClient(std::string ip, int port, int testCounts);
 
-void StartServer(int port);
+void StartServer(int port, int testCounts);

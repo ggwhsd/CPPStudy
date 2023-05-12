@@ -158,6 +158,10 @@ using C++ 11  ,vs2017
 * 一个简单的对象池示例。
 [示例](./VS2017Project/Practice/ObjectPoolStudy.h)
 
+* 关于编译器字节对齐的使用，用于简化网络协议开发时候很有用。
+[示例](./VS2017Project/Practice/BytePack.h)
+
+
 
 # DLL
 

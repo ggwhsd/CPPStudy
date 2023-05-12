@@ -165,6 +165,7 @@
   <ItemGroup>
     <ClInclude Include="asyncFutureStudy.h" />
     <ClInclude Include="BlockingQueue.h" />
+    <ClInclude Include="BytePack.h" />
     <ClInclude Include="chronoStudy.h" />
     <ClInclude Include="CircleVector.h" />
     <ClInclude Include="ComputerInformation.h" />
